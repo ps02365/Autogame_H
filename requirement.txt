@@ -1,0 +1,6 @@
+keyboard
+opencv-python
+pyautogui
+pydirectinput
+pywin32
+configparser

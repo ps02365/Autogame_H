@@ -1,0 +1,11 @@
+build
+venv
+*.spec
+*.rar
+dist
+positive
+negative
+monster
+labels
+airplane
+sp
