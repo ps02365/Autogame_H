@@ -19,90 +19,82 @@ def X_form():
     # pyautogui.keyDown('r')
     # time.sleep(0.01)
     pyautogui.click(button='left',x=253,y=1041) #change chat channel
-    time.sleep(0.01)
+    # time.sleep(0.001)
     pyautogui.click(button='left',x=395,y=1067) #open F7
-    time.sleep(0.01)
+    # time.sleep(0.001)
     pyautogui.click(button='left',x=804,y=558) #Choose flight form list
-    time.sleep(0.01)
+    # time.sleep(0.001)
     pyautogui.click(button='left',x=740,y=712) #Choose flight form "X"
-    time.sleep(0.01)    
+    # time.sleep(0.001)    
     pyautogui.click(button='left',x=988,y=725) #Apply
-    # time.sleep(0.01)
-    # pyautogui.keyUp('r')
-    time.sleep(0.01)
-    pyautogui.press('esc') #Exit F7
-    time.sleep(0.01)
+    # time.sleep(0.001)
     pyautogui.click(button='left',x=21,y=1040) #All chat channel
-    time.sleep(0.01) 
+    # time.sleep(0.001)
     pyautogui.click(button='left',x=960,y=540) #Move to Central
-    time.sleep(0.01)
+    # time.sleep(0.001)
+    keyupR()
+    # time.sleep(0.001)
+    pyautogui.press('esc') #Exit F7
+
 
 def Boost_form():
     # pyautogui.keyDown('r')
     # time.sleep(0.01)
     pyautogui.click(button='left',x=253,y=1041) #change chat channel
-    time.sleep(0.01)
+    # time.sleep(0.001)
     pyautogui.click(button='left',x=395,y=1067) #open F7
-    time.sleep(0.01)
+    # time.sleep(0.001)
     pyautogui.click(button='left',x=804,y=558) #Choose flight form list
-    time.sleep(0.01)
+    # time.sleep(0.001)
     pyautogui.click(button='left',x=740,y=598) #Choose flight form "Boost"
-    time.sleep(0.01)    
+    # time.sleep(0.001)    
     pyautogui.click(button='left',x=988,y=725) #Apply
-    time.sleep(0.01)
-    # pyautogui.keyUp('r')
-    # time.sleep(0.01)
-    pyautogui.press('esc') #Exit F7
-    time.sleep(0.01)
+    # time.sleep(0.001)
     pyautogui.click(button='left',x=21,y=1040) #All chat channel
-    time.sleep(0.01) 
+    # time.sleep(0.001)
     pyautogui.click(button='left',x=960,y=540) #Move to Central
-    time.sleep(0.01)
+    # time.sleep(0.001)
+    keyupR()
+    # time.sleep(0.001)
+    pyautogui.press('esc') #Exit F7
 
 def ChangeLeader():
     pyautogui.click(button='left',x=253,y=1041) #change chat channel
-    time.sleep(0.01)
+    # time.sleep(0.001)
     pyautogui.click(button='left',x=395,y=1067) #open F7
-    time.sleep(0.01) 
+    # time.sleep(0.001) 
     pyautogui.click(button='left',x=21,y=1040) #All chat channel
-    time.sleep(0.01) 
+    # time.sleep(0.001) 
     pyautogui.click(button='left',x=960,y=540) #Move to Central
-    time.sleep(0.01)
+    # time.sleep(0.001)
+    keyupR()
 
 # def DHexit():
       #root.destroy()
 #     exit()
 
 def keydownR():
-    time.sleep(0.2)
-    pydirectinput.keyDown('r')
     time.sleep(0.05)
+    pydirectinput.keyDown('r')
+    # time.sleep(0.001)
 
 def keyupR():
-    time.sleep(0.05)
     pydirectinput.keyUp('r')
-    time.sleep(0.05)
 
 def hotkey_X():
     keydownR()
-    time.sleep(0.05)
     X_form()
-    time.sleep(0.05)
-    keyupR()
+    # keyupR()
 
 def hotkey_Boost():
     keydownR()
-    time.sleep(0.05)
     Boost_form()
-    time.sleep(0.05)
-    keyupR()
+    # keyupR()
 
 def hotkey_changeLeader():
     keydownR()
-    time.sleep(0.05)
     ChangeLeader()
-    time.sleep(0.05)
-    keyupR()
+    # keyupR()
 
 # def hotkey_exit():
 #     DHexit()
@@ -120,9 +112,9 @@ def hotkey_changeLeader():
 # button3.pack(pady=10)
 
 
-keyboard.add_hotkey('alt+1', hotkey_X)
-keyboard.add_hotkey('alt+2', hotkey_Boost)
-keyboard.add_hotkey('alt+3', hotkey_changeLeader)
+keyboard.add_hotkey('space+1', hotkey_X)
+keyboard.add_hotkey('space+2', hotkey_Boost)
+keyboard.add_hotkey('space+3', hotkey_changeLeader)
 # keyboard.add_hotkey('ctrl+E', hotkey_exit)
 keyboard.wait()
 # root.mainloop()
