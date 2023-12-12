@@ -9,26 +9,24 @@ pyautogui.FAILSAFE = False
 pydirectinput.FAILSAFE = False
 
 
-def focus_dream_ace():
-    hwnd = win32gui.FindWindow(None, "DreamACE")
-    if not hwnd:
-        raise Exception("Not found DreamACE window")
-    win32gui.SetForegroundWindow(hwnd)
+# def focus_dream_ace():
+#     hwnd = win32gui.FindWindow(None, "DreamACE")
+#     if not hwnd:
+#         raise Exception("Not found DreamACE window")
+#     win32gui.SetForegroundWindow(hwnd)
 
 def X_form():
-    # pyautogui.keyDown('r')
-    # time.sleep(0.01)
-    pyautogui.click(button='left',x=253,y=1041) #change chat channel
+    pyautogui.click(button='left',x=170,y=1049) #change chat channel
     # time.sleep(0.001)
-    pyautogui.click(button='left',x=395,y=1067) #open F7
+    pyautogui.click(button='left',x=320,y=1067) #open F7
     # time.sleep(0.001)
-    pyautogui.click(button='left',x=804,y=558) #Choose flight form list
+    pyautogui.click(button='left',x=833,y=533) #Choose flight form list
     # time.sleep(0.001)
-    pyautogui.click(button='left',x=740,y=712) #Choose flight form "X"
+    pyautogui.click(button='left',x=781,y=676) #Choose flight form "X"
     # time.sleep(0.001)    
-    pyautogui.click(button='left',x=988,y=725) #Apply
+    pyautogui.click(button='left',x=980,y=690) #Apply
     # time.sleep(0.001)
-    pyautogui.click(button='left',x=21,y=1040) #All chat channel
+    pyautogui.click(button='left',x=16,y=690) #All chat channel
     # time.sleep(0.001)
     pyautogui.click(button='left',x=960,y=540) #Move to Central
     # time.sleep(0.001)
@@ -38,19 +36,17 @@ def X_form():
 
 
 def Boost_form():
-    # pyautogui.keyDown('r')
-    # time.sleep(0.01)
-    pyautogui.click(button='left',x=253,y=1041) #change chat channel
+    pyautogui.click(button='left',x=170,y=1049) #change chat channel
     # time.sleep(0.001)
-    pyautogui.click(button='left',x=395,y=1067) #open F7
+    pyautogui.click(button='left',x=320,y=1067) #open F7
     # time.sleep(0.001)
-    pyautogui.click(button='left',x=804,y=558) #Choose flight form list
+    pyautogui.click(button='left',x=833,y=533) #Choose flight form list
     # time.sleep(0.001)
-    pyautogui.click(button='left',x=740,y=598) #Choose flight form "Boost"
+    pyautogui.click(button='left',x=777,y=590) #Choose flight form "Boost"
     # time.sleep(0.001)    
-    pyautogui.click(button='left',x=988,y=725) #Apply
+    pyautogui.click(button='left',x=980,y=690) #Apply
     # time.sleep(0.001)
-    pyautogui.click(button='left',x=21,y=1040) #All chat channel
+    pyautogui.click(button='left',x=16,y=690) #All chat channel
     # time.sleep(0.001)
     pyautogui.click(button='left',x=960,y=540) #Move to Central
     # time.sleep(0.001)
@@ -59,12 +55,12 @@ def Boost_form():
     pyautogui.press('esc') #Exit F7
 
 def ChangeLeader():
-    pyautogui.click(button='left',x=253,y=1041) #change chat channel
+    pyautogui.click(button='left',x=170,y=1049) #change chat channel
     # time.sleep(0.001)
-    pyautogui.click(button='left',x=395,y=1067) #open F7
+    pyautogui.click(button='left',x=320,y=1067) #open F7
     # time.sleep(0.001) 
-    pyautogui.click(button='left',x=21,y=1040) #All chat channel
-    # time.sleep(0.001) 
+    pyautogui.click(button='left',x=16,y=690) #All chat channel
+    # time.sleep(0.001)
     pyautogui.click(button='left',x=960,y=540) #Move to Central
     # time.sleep(0.001)
     keyupR()
@@ -84,17 +80,17 @@ def keyupR():
 def hotkey_X():
     keydownR()
     X_form()
-    # keyupR()
 
 def hotkey_Boost():
     keydownR()
     Boost_form()
-    # keyupR()
 
 def hotkey_changeLeader():
     keydownR()
     ChangeLeader()
-    # keyupR()
+
+
+
 
 # def hotkey_exit():
 #     DHexit()
