@@ -16,11 +16,11 @@ pydirectinput.FAILSAFE = False
 #     win32gui.SetForegroundWindow(hwnd)
 
 def X_form():
-    pyautogui.click(button='left',x=170,y=1049) #change chat channel
+    pyautogui.click(button='left',x=201,y=1049) #change chat channel
     # time.sleep(0.001)
     pyautogui.click(button='left',x=320,y=1067) #open F7
     # time.sleep(0.001)
-    pyautogui.click(button='left',x=833,y=533) #Choose flight form list
+    pyautogui.click(button='left',x=837,y=552) #Choose flight form list
     # time.sleep(0.001)
     pyautogui.click(button='left',x=781,y=676) #Choose flight form "X"
     # time.sleep(0.001)    
@@ -36,11 +36,11 @@ def X_form():
 
 
 def Boost_form():
-    pyautogui.click(button='left',x=170,y=1049) #change chat channel
+    pyautogui.click(button='left',x=201,y=1049) #change chat channel
     # time.sleep(0.001)
     pyautogui.click(button='left',x=320,y=1067) #open F7
     # time.sleep(0.001)
-    pyautogui.click(button='left',x=833,y=533) #Choose flight form list
+    pyautogui.click(button='left',x=837,y=552) #Choose flight form list
     # time.sleep(0.001)
     pyautogui.click(button='left',x=777,y=590) #Choose flight form "Boost"
     # time.sleep(0.001)    
@@ -55,7 +55,7 @@ def Boost_form():
     pyautogui.press('esc') #Exit F7
 
 def ChangeLeader():
-    pyautogui.click(button='left',x=170,y=1049) #change chat channel
+    pyautogui.click(button='left',x=201,y=1049) #change chat channel
     # time.sleep(0.001)
     pyautogui.click(button='left',x=320,y=1067) #open F7
     # time.sleep(0.001) 
