@@ -108,9 +108,9 @@ def hotkey_changeLeader():
 # button3.pack(pady=10)
 
 
-keyboard.add_hotkey('space+1', hotkey_X)
-keyboard.add_hotkey('space+2', hotkey_Boost)
-keyboard.add_hotkey('space+3', hotkey_changeLeader)
+keyboard.add_hotkey('space+c', hotkey_X)
+keyboard.add_hotkey('space+v', hotkey_Boost)
+keyboard.add_hotkey('space+x', hotkey_changeLeader)
 # keyboard.add_hotkey('ctrl+E', hotkey_exit)
 keyboard.wait()
 # root.mainloop()
