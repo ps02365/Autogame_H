@@ -47,24 +47,97 @@ def check_for_revival():
         revising = False
         running = True
 
-def auto_high_down():
+# def auto_high_down():
+#     tick = 10
+#     height = 270
+#     global running
+#     while True:
+#         if revising == False:
+#             high_point = pyautogui.locateOnScreen('current_height.png', confidence=0.9,region=(1860,height, 1903,313))
+#             if not high_point:
+#                 running = False
+#                 sleep(3)
+#                 pydirectinput.keyDown("s")
+#                 while not high_point:
+#                     pyautogui.moveTo(1920, 700)
+#                     sleep(1)
+#                     pyautogui.moveTo(1920, 540)
+#                     high_point = pyautogui.locateOnScreen('current_height.png', confidence=0.9,region=(1860,height, 1903,313))
+#                 running = True
+#         sleep(tick)         
+
+def auto_balance_height():
     tick = 10
-    height = 270
+    height = 0
+    
     global running
     while True:
         if revising == False:
-            high_point = pyautogui.locateOnScreen('current_height.png', confidence=0.9,region=(1860,height, 1903,313))
-            if not high_point:
+            high_point = pyautogui.locateOnScreen('current_height.png', confidence=0.9,region=(1860,height, 1903,275))
+            right_point = pyautogui.locateOnScreen('current_height.png', confidence=0.9,region=(1860,275, 1903,295))
+            low_point = pyautogui.locateOnScreen('current_height.png', confidence=0.9,region=(1860,height, 1903,315))
+            if not right_point:
                 running = False
                 sleep(3)
                 pydirectinput.keyDown("s")
-                while not high_point:
+                while high_point:
                     pyautogui.moveTo(1920, 700)
                     sleep(1)
                     pyautogui.moveTo(1920, 540)
-                    high_point = pyautogui.locateOnScreen('current_height.png', confidence=0.9,region=(1860,height, 1903,313))
+                    right_point = pyautogui.locateOnScreen('current_height.png', confidence=0.9,region=(1860,275, 1903,295))
                 running = True
-        sleep(tick)         
+            else:
+                running = False
+                sleep(3)
+                pydirectinput.keyDown("s")                
+                while low_point:
+                    pyautogui.moveTo(1920, 400)
+                    sleep(1)
+                    pyautogui.moveTo(1920, 540)
+                    right_point = pyautogui.locateOnScreen('current_height.png', confidence=0.9,region=(1860,275, 1903,295))
+                running = True                 
+        sleep(tick)     
+
+def auto_high_down():
+    tick = 10
+    height = 0
+    
+    global running
+    while True:
+        if revising == False:
+            high_point = pyautogui.locateOnScreen('current_height.png', confidence=0.9,region=(1860,height, 1903,275))
+            right_point = pyautogui.locateOnScreen('current_height.png', confidence=0.9,region=(1860,275, 1903,295))
+            if not right_point:
+                running = False
+                sleep(3)
+                pydirectinput.keyDown("s")
+                while high_point:
+                    pyautogui.moveTo(1920, 700)
+                    sleep(1)
+                    pyautogui.moveTo(1920, 540)
+                    right_point = pyautogui.locateOnScreen('current_height.png', confidence=0.9,region=(1860,275, 1903,295))
+                running = True
+        sleep(tick)     
+
+def auto_high_up():
+    tick = 10
+    height = 295
+    global running
+    while True:
+        if revising == False:
+            low_point = pyautogui.locateOnScreen('current_height.png', confidence=0.9,region=(1860,height, 1903,315))
+            right_point = pyautogui.locateOnScreen('current_height.png', confidence=0.9,region=(1860,275, 1903,295))
+            if not right_point:
+                running = False
+                sleep(3)
+                pydirectinput.keyDown("s")
+                while low_point:
+                    pyautogui.moveTo(1920, 400)
+                    sleep(1)
+                    pyautogui.moveTo(1920, 540)
+                    right_point = pyautogui.locateOnScreen('current_height.png', confidence=0.9,region=(1860,275, 1903,295))
+                running = True
+        sleep(tick)   
 
 def auto_ammunition():
     tick = 1
@@ -148,34 +221,36 @@ def run_air_plane():
     sleep(0.1)
 
 def auto_die():
-    while True:
-        global running
-        global last_killed_at
-        running = False
-        last_killed_at = None
-        sleep(4)
-        skill_socket = pyautogui.locateOnScreen('kit_socket.png', confidence=0.95)
-        if skill_socket:
-            sleep(0.1)
-            pydirectinput.press("0")
-            sleep(1)
+    global running
+    global last_killed_at
+    running = False
+    last_killed_at = None
+    sleep(4)
+    skill_socket = pyautogui.locateOnScreen('kit_socket.png', confidence=0.95)
+    if skill_socket:
+        sleep(0.1)
+        pydirectinput.press("0")
+        sleep(1)
 
-        sleep(0.1)
-        pydirectinput.press("a")
-        sleep(0.1)
-        pydirectinput.press("e")
-        sleep(0.1)
+    sleep(0.1)
+    pydirectinput.press("a")
+    sleep(0.1)
+    pydirectinput.press("e")
+    sleep(0.1)
+    pyautogui.moveTo(960, 1080)
+    revise_dialog = pyautogui.locateOnScreen('dialog.png', confidence=0.6)
+    pydirectinput.keyDown('space')
+    while not revise_dialog:
+        sleep(0.5)
         pyautogui.moveTo(960, 1080)
         revise_dialog = pyautogui.locateOnScreen('dialog.png', confidence=0.6)
-        pydirectinput.keyDown('space')
-        while not revise_dialog:
-            sleep(0.5)
-            pyautogui.moveTo(960, 1080)
-            revise_dialog = pyautogui.locateOnScreen('dialog.png', confidence=0.6)
-        pydirectinput.keyUp('space')
-        check_for_revival()
+    pydirectinput.keyUp('space')
+    check_for_revival()
+
+def run_auto_die():
+    while True:
+        auto_die()
         sleep(600)
-    
 
 def start_auto():
     auto_skill_process = Thread(target=auto_skill, daemon=True)
@@ -187,7 +262,7 @@ def start_auto():
     auto_high_down_process = Thread(target=auto_high_down, daemon=True)
     auto_high_down_process.start()
 
-    auto_die_process = Thread(target=auto_die,daemon=True)
+    auto_die_process = Thread(target=run_auto_die,daemon=True)
     auto_die_process.start()
     
     run_air_plane()
@@ -196,6 +271,7 @@ def start_auto():
     fire()
     for i in range(100000000):
         check_for_revival()
+        # auto_die()
         if running:
             eval("{}()".format(move_function_name))
             if i % 2 == 0:
