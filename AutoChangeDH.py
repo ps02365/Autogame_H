@@ -65,6 +65,60 @@ def ChangeLeader():
     # time.sleep(0.001)
     keyupR()
 
+def ChangeLeaderSlot1():
+    pyautogui.click(button='left',x=201,y=1049) #change chat channel
+    # time.sleep(0.001)
+    pyautogui.click(button='left',x=320,y=1067) #open F7
+    # time.sleep(0.001) 
+    pyautogui.click(button='left',x=16,y=690) #All chat channel
+    # time.sleep(0.001)
+    keyupR()
+
+def ChangeLeaderSlot2():
+    pyautogui.click(button='left',x=201,y=1049) #change chat channel
+    # time.sleep(0.001)
+    pyautogui.click(button='left',x=320,y=1067) #open F7
+    # time.sleep(0.001) 
+    pyautogui.click(button='left',x=16,y=690) #All chat channel
+    # time.sleep(0.001)
+    keyupR()
+
+def ChangeLeaderSlot3():
+    pyautogui.click(button='left',x=201,y=1049) #change chat channel
+    # time.sleep(0.001)
+    pyautogui.click(button='left',x=320,y=1067) #open F7
+    # time.sleep(0.001) 
+    pyautogui.click(button='left',x=16,y=690) #All chat channel
+    # time.sleep(0.001)
+    keyupR()
+
+def ChangeLeaderSlot4():
+    pyautogui.click(button='left',x=201,y=1049) #change chat channel
+    # time.sleep(0.001)
+    pyautogui.click(button='left',x=320,y=1067) #open F7
+    # time.sleep(0.001) 
+    pyautogui.click(button='left',x=16,y=690) #All chat channel
+    # time.sleep(0.001)
+    keyupR()
+
+def ChangeLeaderSlot5():
+    pyautogui.click(button='left',x=201,y=1049) #change chat channel
+    # time.sleep(0.001)
+    pyautogui.click(button='left',x=320,y=1067) #open F7
+    # time.sleep(0.001) 
+    pyautogui.click(button='left',x=16,y=690) #All chat channel
+    # time.sleep(0.001)
+    keyupR()
+
+def ChangeLeaderSlot6():
+    pyautogui.click(button='left',x=201,y=1049) #change chat channel
+    # time.sleep(0.001)
+    pyautogui.click(button='left',x=320,y=1067) #open F7
+    # time.sleep(0.001) 
+    pyautogui.click(button='left',x=16,y=690) #All chat channel
+    # time.sleep(0.001)
+    keyupR()
+
 # def DHexit():
       #root.destroy()
 #     exit()

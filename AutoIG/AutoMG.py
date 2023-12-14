@@ -66,16 +66,61 @@ def check_for_revival():
 #                 running = True
 #         sleep(tick)         
 
-def auto_balance_height():
-    tick = 10
-    height = 0
-    
+def Training_area():
     global running
     while True:
         if revising == False:
-            high_point = pyautogui.locateOnScreen('current_height.png', confidence=0.9,region=(1860,height, 1903,275))
+            Training_area_1 = pyautogui.locateOnScreen('Air_plane.png', confidence=0.9,region=(1860,0, 1903,275))
+            Training_area_2 = pyautogui.locateOnScreen('Air_plane.png', confidence=0.9,region=(1860,0, 1903,275))
+            Training_area_3 = pyautogui.locateOnScreen('Air_plane.png', confidence=0.9,region=(1860,0, 1903,275))
+            if not Training_area_1 or Training_area_2 or Training_area_3:
+                running = False
+                auto_die()
+                while not Training_area_1 or Training_area_2 or Training_area_3:
+                    auto_die()
+                    Training_area_1 or Training_area_2 or Training_area_3
+                running = True
+            sleep (10)
+
+def auto_die():
+    global running
+    global last_killed_at
+    running = False
+    last_killed_at = None
+    sleep(4)
+    skill_socket = pyautogui.locateOnScreen('kit_socket.png', confidence=0.95)
+    if skill_socket:
+        sleep(0.1)
+        pydirectinput.press("0")
+        sleep(1)
+    sleep(0.1)
+    pydirectinput.press("a")
+    sleep(0.1)
+    pydirectinput.press("e")
+    sleep(0.1)
+    pyautogui.moveTo(960, 1080)
+    revise_dialog = pyautogui.locateOnScreen('dialog.png', confidence=0.6)
+    pydirectinput.keyDown('space')
+    while not revise_dialog:
+        sleep(0.5)
+        pyautogui.moveTo(960, 1080)
+        revise_dialog = pyautogui.locateOnScreen('dialog.png', confidence=0.6)
+    pydirectinput.keyUp('space')
+    check_for_revival()
+
+def run_auto_die():
+    while True:
+        auto_die()
+        sleep(600)
+
+def auto_balance_height():
+    tick = 10 
+    global running
+    while True:
+        if revising == False:
+            high_point = pyautogui.locateOnScreen('current_height.png', confidence=0.9,region=(1860,0, 1903,275))
             right_point = pyautogui.locateOnScreen('current_height.png', confidence=0.9,region=(1860,275, 1903,295))
-            low_point = pyautogui.locateOnScreen('current_height.png', confidence=0.9,region=(1860,height, 1903,315))
+            low_point = pyautogui.locateOnScreen('current_height.png', confidence=0.9,region=(1860,295, 1903,315))
             if not right_point:
                 running = False
                 sleep(3)
@@ -100,8 +145,7 @@ def auto_balance_height():
 
 def auto_high_down():
     tick = 10
-    height = 0
-    
+    height = 0  
     global running
     while True:
         if revising == False:
@@ -219,38 +263,6 @@ def run_air_plane():
     sleep(0.1)
     pydirectinput.press('c')
     sleep(0.1)
-
-def auto_die():
-    global running
-    global last_killed_at
-    running = False
-    last_killed_at = None
-    sleep(4)
-    skill_socket = pyautogui.locateOnScreen('kit_socket.png', confidence=0.95)
-    if skill_socket:
-        sleep(0.1)
-        pydirectinput.press("0")
-        sleep(1)
-
-    sleep(0.1)
-    pydirectinput.press("a")
-    sleep(0.1)
-    pydirectinput.press("e")
-    sleep(0.1)
-    pyautogui.moveTo(960, 1080)
-    revise_dialog = pyautogui.locateOnScreen('dialog.png', confidence=0.6)
-    pydirectinput.keyDown('space')
-    while not revise_dialog:
-        sleep(0.5)
-        pyautogui.moveTo(960, 1080)
-        revise_dialog = pyautogui.locateOnScreen('dialog.png', confidence=0.6)
-    pydirectinput.keyUp('space')
-    check_for_revival()
-
-def run_auto_die():
-    while True:
-        auto_die()
-        sleep(600)
 
 def start_auto():
     auto_skill_process = Thread(target=auto_skill, daemon=True)
