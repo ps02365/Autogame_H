@@ -1,9 +1,7 @@
-import win32gui
-import time
+from time import sleep
 import pydirectinput
 import pyautogui
 import keyboard
-import tkinter as tk
 
 pyautogui.FAILSAFE = False
 pydirectinput.FAILSAFE = False
@@ -72,7 +70,7 @@ def ChangeLeaderSlot6():
     keyupR()
 
 def keydownR():
-    time.sleep(0.05)
+    sleep(0.05)
     pydirectinput.keyDown('r')
 
 def keyupR():
