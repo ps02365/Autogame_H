@@ -2,7 +2,7 @@ from time import sleep, time
 import pyautogui
 import pydirectinput
 import pygetwindow as gw
-from core_utils.window_capture import WindowCapture
+# from core_utils.window_capture import WindowCapture
 from threading import Thread
 import win32gui
 
@@ -11,7 +11,7 @@ current_slot = 2
 last_killed_at = None
 running = True
 revising = False
-wincap = WindowCapture('DreamACE')
+# wincap = WindowCapture('DreamACE')
 move_function_name = 'position_air_plane'
 
 def start_game():
@@ -56,7 +56,6 @@ def Training_area():
             Training_area_3 = pyautogui.locateOnScreen('Air_Plane.png', confidence=0.9,region=(1860,0, 1903,275))
             if not Training_area_1:
                 running = False
-                auto_die()
                 while not Training_area_1:
                     auto_die()
                     Training_area_1 
