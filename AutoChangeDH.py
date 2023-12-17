@@ -36,41 +36,49 @@ def ChangeLeader():
     keyupR()
 
 def ChangeLeaderSlot1():
-    pyautogui.click(button='left',x=201,y=1049) #change chat channel
-    pyautogui.click(button='left',x=320,y=1067) #open F7
-    pyautogui.click(button='left',x=16,y=690) #All chat channel
+    pyautogui.click(button='left',x=1024,y=516) #Choose leader
+    pyautogui.click(button='left',x=1175,y=691) #Authorize
+    pyautogui.click(button='left',x=939,y=554) #Accpept
     keyupR()
+    pyautogui.press('esc') #Exit F7
+
 def ChangeLeaderSlot2():
-    pyautogui.click(button='left',x=201,y=1049) #change chat channel
-    pyautogui.click(button='left',x=320,y=1067) #open F7 
-    pyautogui.click(button='left',x=16,y=690) #All chat channel
+    pyautogui.click(button='left',x=1024,y=533) #Choose leader
+    pyautogui.click(button='left',x=1175,y=691) #Authorize
+    pyautogui.click(button='left',x=939,y=554) #Accpept
     keyupR()
+    pyautogui.press('esc') #Exit F7
 
 def ChangeLeaderSlot3():
-    pyautogui.click(button='left',x=201,y=1049) #change chat channel
-    pyautogui.click(button='left',x=320,y=1067) #open F7
-    pyautogui.click(button='left',x=16,y=690) #All chat channel
+    pyautogui.click(button='left',x=1024,y=550) #Choose leader
+    pyautogui.click(button='left',x=1175,y=691) #Authorize
+    pyautogui.click(button='left',x=939,y=554) #Accpept
     keyupR()
+    pyautogui.press('esc') #Exit F7
+
 def ChangeLeaderSlot4():
-    pyautogui.click(button='left',x=201,y=1049) #change chat channel
-    pyautogui.click(button='left',x=320,y=1067) #open F7
-    pyautogui.click(button='left',x=16,y=690) #All chat channel
+    pyautogui.click(button='left',x=1024,y=566) #Choose leader
+    pyautogui.click(button='left',x=1175,y=691) #Authorize
+    pyautogui.click(button='left',x=939,y=554) #Accpept
     keyupR()
+    pyautogui.press('esc') #Exit F7
 
 def ChangeLeaderSlot5():
-    pyautogui.click(button='left',x=201,y=1049) #change chat channel
-    pyautogui.click(button='left',x=320,y=1067) #open F7
-    pyautogui.click(button='left',x=16,y=690) #All chat channel
+    pyautogui.click(button='left',x=1024,y=582) #Choose leader
+    pyautogui.click(button='left',x=1175,y=691) #Authorize
+    pyautogui.click(button='left',x=939,y=554) #Accpept
     keyupR()
+    pyautogui.press('esc') #Exit F7
 
 def ChangeLeaderSlot6():
-    pyautogui.click(button='left',x=201,y=1049) #change chat channel
-    pyautogui.click(button='left',x=320,y=1067) #open F7
-    pyautogui.click(button='left',x=16,y=690) #All chat channel
+    pyautogui.click(button='left',x=1024,y=597) #Choose leader
+    pyautogui.click(button='left',x=1175,y=691) #Authorize
+    pyautogui.click(button='left',x=939,y=554) #Accpept
     keyupR()
+    pyautogui.press('esc') #Exit F7
 
 def keydownR():
-    sleep(0.05)
+    # sleep(0.05)
     pydirectinput.keyDown('r')
 
 def keyupR():
@@ -115,11 +123,11 @@ def hotkey_change_leader_slot6():
 keyboard.add_hotkey('space+c', hotkey_X)
 keyboard.add_hotkey('space+v', hotkey_Boost)
 keyboard.add_hotkey('space+x', hotkey_changeLeader)
-keyboard.add_hotkey('Num1', hotkey_change_leader_slot1)
-keyboard.add_hotkey('Num2', hotkey_change_leader_slot2)
-keyboard.add_hotkey('Num3', hotkey_change_leader_slot3)
-keyboard.add_hotkey('Num4', hotkey_change_leader_slot4)
-keyboard.add_hotkey('Num5', hotkey_change_leader_slot5)
-keyboard.add_hotkey('Num6', hotkey_change_leader_slot6)
+keyboard.add_hotkey('num 1', hotkey_change_leader_slot1)
+keyboard.add_hotkey('num 2', hotkey_change_leader_slot2)
+keyboard.add_hotkey('num 3', hotkey_change_leader_slot3)
+keyboard.add_hotkey('num 4', hotkey_change_leader_slot4)
+keyboard.add_hotkey('num 5', hotkey_change_leader_slot5)
+keyboard.add_hotkey('num 6', hotkey_change_leader_slot6)
 keyboard.wait()
 

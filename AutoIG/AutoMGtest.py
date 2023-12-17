@@ -15,11 +15,11 @@ revising = False
 move_function_name = 'position_air_plane'
 
 def start_game():
-    hwnd = win32gui.FindWindow(None, "DreamACE")
-    if not hwnd:
-        raise Exception("Not found DreamACE window")
-    win32gui.SetForegroundWindow(hwnd)
-    sleep(1)
+    # hwnd = win32gui.FindWindow(None, "DreamACE")
+    # if not hwnd:
+    #     raise Exception("Not found DreamACE window")
+    # win32gui.SetForegroundWindow(hwnd)
+    # sleep(1)
     
     start_auto()
 
@@ -51,9 +51,9 @@ def Training_area():
     global running
     while True:
         if revising == False:
-            Training_area_1 = pyautogui.locateOnScreen('Air_Plane.png', confidence=0.9,region=(820,345,1060,440))
-            Training_area_2 = pyautogui.locateOnScreen('Air_Plane.png', confidence=0.9,region=(1860,0, 1903,275))
-            Training_area_3 = pyautogui.locateOnScreen('Air_Plane.png', confidence=0.9,region=(1860,0, 1903,275))
+            Training_area_1 = pyautogui.locateOnScreen('1920x1080/Air_Plane.png', confidence=0.9,region=(820,345,1060,440))
+            Training_area_2 = pyautogui.locateOnScreen('1920x1080/Air_Plane.png', confidence=0.9,region=(1860,0, 1903,275))
+            Training_area_3 = pyautogui.locateOnScreen('1920x1080/Air_Plane.png', confidence=0.9,region=(1860,0, 1903,275))
             if not Training_area_1:
                 running = False
                 while not Training_area_1:
