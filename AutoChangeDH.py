@@ -96,29 +96,29 @@ def hotkey_changeLeader():
     keydownR()
     ChangeLeader()
 
-def hotkey_change_leader_slot1():
-    keydownR()
-    ChangeLeaderSlot1()
+# def hotkey_change_leader_slot1():
+#     keydownR()
+#     ChangeLeaderSlot1()
 
-def hotkey_change_leader_slot2():
-    keydownR()
-    ChangeLeaderSlot2()
+# def hotkey_change_leader_slot2():
+#     keydownR()
+#     ChangeLeaderSlot2()
 
-def hotkey_change_leader_slot3():
-    keydownR()
-    ChangeLeaderSlot3()
+# def hotkey_change_leader_slot3():
+#     keydownR()
+#     ChangeLeaderSlot3()
 
-def hotkey_change_leader_slot4():
-    keydownR()
-    ChangeLeaderSlot4()
+# def hotkey_change_leader_slot4():
+#     keydownR()
+#     ChangeLeaderSlot4()
 
-def hotkey_change_leader_slot5():
-    keydownR()
-    ChangeLeaderSlot5()
+# def hotkey_change_leader_slot5():
+#     keydownR()
+#     ChangeLeaderSlot5()
 
-def hotkey_change_leader_slot6():
-    keydownR()
-    ChangeLeaderSlot6()
+# def hotkey_change_leader_slot6():
+#     keydownR()
+#     ChangeLeaderSlot6()
 
 keyboard.add_hotkey('space+c', hotkey_X)
 keyboard.add_hotkey('space+v', hotkey_Boost)
