@@ -13,7 +13,7 @@ current_slot = 2
 last_killed_at = None
 running = True
 revising = False
-auto_die_time_elapsed = time()
+start_die_time = time()
 def start_game():
     gw.getWindowsWithTitle('DreamACE')[0].activate()
     sleep(1)
@@ -50,8 +50,8 @@ def auto_die():
     check_for_revival()
     
 def start_auto():
-    auto_skill_process = Thread(target=auto_skill, daemon=True)
-    auto_skill_process.start()
+    # auto_skill_process = Thread(target=auto_skill, daemon=True)
+    # auto_skill_process.start()
 
     auto_ammunition_process = Thread(target=auto_ammunition, daemon=True)
     auto_ammunition_process.start()
@@ -72,10 +72,9 @@ def start_auto():
                 release_fire()
                 release_down_air_plane()
             position_air_plane(i)
-            if i > 1 and i % 100 == 0:
-                # auto_die()
-                pass
-            position_air_plane(i)
+            # if time() - start_die_time > 600:
+            #     auto_die()
+            # position_air_plane(i)
         sleep(0.2)
 
 def recharge_fuel(should_start_auto = True):
@@ -101,7 +100,7 @@ def auto_high_down():
                     pyautogui.moveTo(1920, 700)
                     sleep(1)
                     pyautogui.moveTo(1920, 540)
-                    high_point = pyautogui.locateOnScreen('current_height.png', confidence=0.5,region=(1889,271, 1903,313))
+                    high_point = pyautogui.locateOnScreen('current_height.png', confidence=0.5,region=(1860,250, 1903,313))
                 running = True
         sleep(tick)
             
@@ -163,7 +162,7 @@ def check_for_revival():
         slots = [
             # 'go_to_s4',
             'go_to_s2',
-            'go_to_s9',
+            # 'go_to_s9',
             # 'go_to_s5'
         ]
 
@@ -324,7 +323,7 @@ def high_down_air_plane():
 
 def position_air_plane(i = -1):
     stop_to_shoot_x = 1060
-    right_move = 1700
+    right_move = 1600
     stop_to_shoot_second = 0.05
     # if i > 0 and i % 40 == 0:
     #     high_down_air_plane()
