@@ -159,18 +159,9 @@ def check_for_revival():
         pydirectinput.press("s")
         sleep(0.1)
 
-        slots = [
-            # 'go_to_s4',
-            'go_to_s2',
-            # 'go_to_s9',
-            # 'go_to_s5'
-        ]
+        slots = go_to_s2
 
         slot_to_go = random.choice(slots)
-        # if last_killed_at is None or (current_time - last_killed_at).total_seconds() > 600:
-        #     slot_to_go = random.choice(slots)
-        # else:
-        #     slot_to_go = 'go_to_s3'
             
         last_killed_at = current_time
         pydirectinput.press('esc')
@@ -322,21 +313,9 @@ def high_down_air_plane():
     sleep(0.5)
 
 def position_air_plane(i = -1):
-    stop_to_shoot_x = 1060
     right_move = 1600
-    stop_to_shoot_second = 0.05
-    # if i > 0 and i % 40 == 0:
-    #     high_down_air_plane()
-    # pyautogui.moveTo(right_move, 540)
-    # sleep(0.1)
-    # pyautogui.moveTo(stop_to_shoot_x, 540)
-    # sleep(stop_to_shoot_second)
     pyautogui.moveTo(right_move, 540)
     sleep(0.1)
-    # pyautogui.moveTo(stop_to_shoot_x, 540)
-    # sleep(stop_to_shoot_second)
-    # pyautogui.moveTo(right_move, 540)
-    # sleep(0.1)
 
 def locateOnScreen(template_path, region = None, confidence = 0.9):
     # Load the screen image

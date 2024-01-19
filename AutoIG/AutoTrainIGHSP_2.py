@@ -23,16 +23,35 @@ def Training_area():
     global running
     while True:
         if revising == False:
-            Training_area_1 = pyautogui.locateOnScreen('Air_Plane.png', confidence=0.9,region=(820,345,1060,440))
-            Training_area_2 = pyautogui.locateOnScreen('Air_Plane.png', confidence=0.9,region=(1860,0, 1903,275))
-            Training_area_3 = pyautogui.locateOnScreen('Air_Plane.png', confidence=0.9,region=(1860,0, 1903,275))
-            if not Training_area_1 or Training_area_2 or Training_area_3:
+            # Training_area_1 = pyautogui.locateOnScreen('Air_Plane.png', confidence=0.9,region=(1040,575,1220,745)) #s3
+            # Training_area_2 = pyautogui.locateOnScreen('Air_Plane.png', confidence=0.9,region=(1040,237,1215,486)) #s9,s6
+            # Training_area_3 = pyautogui.locateOnScreen('Air_Plane.png', confidence=0.9,region=(820,370, 1040,594)) #s4,s5
+            Training_area_1 = pyautogui.locateOnScreen('Air_Plane.png', confidence=0.9,region=(700,280,870,380)) #s7
+            Training_area_2 = pyautogui.locateOnScreen('Air_Plane.png', confidence=0.9,region=(960,300,1040,370)) #s8
+            Training_area_3 = pyautogui.locateOnScreen('Air_Plane.png', confidence=0.9,region=(1060,550, 1175,625)) #s6
+            Training_area_4 = pyautogui.locateOnScreen('Air_Plane.png', confidence=0.9,region=(690,600, 1020,800)) #s1,2
+            if not Training_area_1 or Training_area_2 or Training_area_3 or Training_area_4:
                 running = False
-                while not Training_area_1 or Training_area_2 or Training_area_3:
+                while not Training_area_1 or Training_area_2 or Training_area_3 or Training_area_4:
                     auto_die()
-                    Training_area_1 or Training_area_2 or Training_area_3
+                    Training_area_1 or Training_area_2 or Training_area_3 or Training_area_4
                 running = True
-            sleep (3)   
+            sleep (300)   
+
+def Not_Training_area():
+    global running
+    while True:
+        if revising == False:
+            Not_Training_area_1 = pyautogui.locateOnScreen('Air_Plane.png', confidence=0.9,region=(850,295,1220,460)) #s8,s9
+            Not_Training_area_2 = pyautogui.locateOnScreen('Air_Plane.png', confidence=0.9,region=(735,382,800,590)) #s4
+            Not_Training_area_3 = pyautogui.locateOnScreen('Air_Plane.png', confidence=0.9,region=(994,435, 1190,753)) #s3,s6
+            if Not_Training_area_1 or Not_Training_area_2 or Not_Training_area_3:
+                running = False
+                while Not_Training_area_1 or Not_Training_area_2 or Not_Training_area_3:
+                    auto_die()
+                    not Not_Training_area_1 or Not_Training_area_2 or Not_Training_area_3
+                running = True
+            sleep (300)   
 
 def auto_die():
     global running
@@ -71,7 +90,13 @@ def start_auto():
     auto_high_down_process = Thread(target=auto_high_down, daemon=True)
     auto_high_down_process.start()
 
+    auto_high_down_process = Thread(target=auto_high_up, daemon=True)
+    auto_high_down_process.start()
+
     auto_high_down_process = Thread(target=Training_area, daemon=True)
+    auto_high_down_process.start()
+
+    auto_high_down_process = Thread(target=Not_Training_area, daemon=True)
     auto_high_down_process.start()
 
     run_air_plane()
@@ -98,23 +123,30 @@ def recharge_fuel(should_start_auto = True):
 
 def auto_high_down():
     tick = 10
-    height = 290
+    height = 300
     global running
     while True:
         if revising == False:
-            high_point = pyautogui.locateOnScreen('current_height.png', confidence=0.9,region=(1860,height, 1903,313))
+            high_point = pyautogui.locateOnScreen('current_height.png', confidence=0.9,region=(1800,height, 1910,330))
             if not high_point:
                 running = False
                 sleep(3)
                 pydirectinput.keyDown("s")
                 while not high_point:
-                    pyautogui.moveTo((1920/8)*5, 700)
+                    pyautogui.moveTo(1920, 700)
                     sleep(1)
                     pyautogui.moveTo((1920/8)*5, 540)
-                    high_point = pyautogui.locateOnScreen('current_height.png', confidence=0.9,region=(1860,height, 1903,313))
+                    high_point = pyautogui.locateOnScreen('current_height.png', confidence=0.9,region=(1800,height, 1910,330))
                 running = True
         sleep(tick)
-            
+         
+def auto_high_up():
+    pyautogui.moveTo(1920, 300)
+    sleep(2)
+    pyautogui.moveTo(1920, 300)
+    sleep(2)
+    pyautogui.moveTo((1920/8)*5, 540)
+    sleep(55)       
 
 def auto_ammunition():
     tick = 1
