@@ -48,14 +48,17 @@ def auto_die():
     
 def start_auto():
     start_die_time = time()
-    # auto_skill_process = Thread(target=auto_skill, daemon=True)
-    # auto_skill_process.start()
+    auto_skill_process = Thread(target=auto_skill, daemon=True)
+    auto_skill_process.start()
 
     auto_ammunition_process = Thread(target=auto_ammunition, daemon=True)
     auto_ammunition_process.start()
 
     auto_high_down_process = Thread(target=auto_high_down, daemon=True)
     auto_high_down_process.start()
+
+    auto_refuel_process = Thread(target=auto_refuel, daemon=True)
+    auto_refuel_process.start()
 
     run_air_plane()
     position_air_plane()
@@ -180,41 +183,51 @@ def auto_skill():
                 sleep(0.1)
                 pydirectinput.keyUp("0")
                 sleep(1)
+            # try:
+            #     phukien_socket = pyautogui.locateOnScreen('./1920x1080/phukien_socket.png', confidence=0.999, region=region_fetch_socket,grayscale=False)
+            # except:
+            #     phukien_socket = None
+            # if phukien_socket == None:
+            #     sleep(0.1)
+            #     pydirectinput.keyDown("0")
+            #     sleep(0.1)
+            #     pydirectinput.keyUp("0")
+            #     sleep(1)
             try:
-                kit_socket = pyautogui.locateOnScreen('./1920x1080/Save_SP.png', confidence=0.999, region=region_fetch_socket,grayscale=False)
+                Save_SP = pyautogui.locateOnScreen('./1920x1080/Save_SP.png', confidence=0.999, region=region_fetch_socket,grayscale=False)
             except:
-                kit_socket = None
-            if kit_socket == None:
+                Save_SP = None
+            if Save_SP == None:
                 sleep(0.1)
                 pydirectinput.keyDown("3")
                 sleep(0.1)
                 pydirectinput.keyUp("3")
                 sleep(1)
             try:
-                kit_socket = pyautogui.locateOnScreen('./1920x1080/Buff_1.png', confidence=0.999, region=region_fetch_socket,grayscale=False)
+                Buff_1 = pyautogui.locateOnScreen('./1920x1080/Buff_1.png', confidence=0.999, region=region_fetch_socket,grayscale=False)
             except:
-                kit_socket = None
-            if kit_socket == None:
+                Buff_1 = None
+            if Buff_1 == None:
                 sleep(0.1)
                 pydirectinput.keyDown("4")
                 sleep(0.1)
                 pydirectinput.keyUp("4")
                 sleep(1)
             try:
-                kit_socket = pyautogui.locateOnScreen('./1920x1080/Buff_2.png', confidence=0.999, region=region_fetch_socket,grayscale=False)
+                Buff_2 = pyautogui.locateOnScreen('./1920x1080/Buff_2.png', confidence=0.999, region=region_fetch_socket,grayscale=False)
             except:
-                kit_socket = None
-            if kit_socket == None:
+                Buff_2 = None
+            if Buff_2 == None:
                 sleep(0.1)
                 pydirectinput.keyDown("5")
                 sleep(0.1)
                 pydirectinput.keyUp("5")
                 sleep(1)
             try:
-                kit_socket = pyautogui.locateOnScreen('./1920x1080/Buff_3.png', confidence=0.999, region=region_fetch_socket,grayscale=False)
+                Buff_3 = pyautogui.locateOnScreen('./1920x1080/Buff_3.png', confidence=0.999, region=region_fetch_socket,grayscale=False)
             except:
-                kit_socket = None
-            if kit_socket == None:
+                Buff_3 = None
+            if Buff_3 == None:
                 sleep(0.1)
                 pydirectinput.keyDown("6")
                 sleep(0.1)

@@ -24,7 +24,7 @@ def screenshot():
     width = 19
     height = 63
     region_to_fetch = (right,top,width,height)
-    pyautogui.screenshot("Not_Trainning_Area_1.png",region_to_fetch) 
+    pyautogui.screenshot("Test_screenshot.png",region_to_fetch) 
 
 def no_cd():
     pyautogui.mouseDown(button='left')
