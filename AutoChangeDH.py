@@ -28,6 +28,17 @@ def Boost_form():
     keyupR()
     pyautogui.press('esc') #Exit F7
 
+def Zero_form():
+    pyautogui.click(button='left',x=201,y=1049) #change chat channel
+    pyautogui.click(button='left',x=320,y=1067) #open F7
+    pyautogui.click(button='left',x=837,y=552) #Choose flight form list
+    pyautogui.click(button='left',x=777,y=590) #Choose flight form "Zero"  
+    pyautogui.click(button='left',x=980,y=690) #Apply
+    pyautogui.click(button='left',x=16,y=1050) #All chat channel
+    pyautogui.click(button='left',x=960,y=540) #Move to Central
+    keyupR()
+    pyautogui.press('esc') #Exit F7
+
 def ChangeLeader():
     pyautogui.click(button='left',x=201,y=1049) #change chat channel
     pyautogui.click(button='left',x=320,y=1067) #open F7
@@ -92,6 +103,11 @@ def hotkey_Boost():
     keydownR()
     Boost_form()
 
+def hotkey_Zero():
+    keydownR()
+    Zero_form()
+    
+
 def hotkey_changeLeader():
     keydownR()
     ChangeLeader()
@@ -123,6 +139,7 @@ def hotkey_changeLeader():
 keyboard.add_hotkey('space+c', hotkey_X)
 keyboard.add_hotkey('space+v', hotkey_Boost)
 keyboard.add_hotkey('space+x', hotkey_changeLeader)
+keyboard.add_hotkey('space+b', hotkey_Zero)
 # keyboard.add_hotkey('num 1', hotkey_change_leader_slot1)
 # keyboard.add_hotkey('num 2', hotkey_change_leader_slot2)
 # keyboard.add_hotkey('num 3', hotkey_change_leader_slot3)
