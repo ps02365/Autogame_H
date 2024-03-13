@@ -19,8 +19,6 @@ def start_game():
     sleep(1)
     
     start_auto()
-    # go_to_s6()
-    
 
 def auto_die():
     global running
@@ -199,9 +197,9 @@ def auto_skill():
                 Save_SP = None
             if Save_SP == None:
                 sleep(0.1)
-                pydirectinput.keyDown("3")
+                pydirectinput.keyDown("4")
                 sleep(0.1)
-                pydirectinput.keyUp("3")
+                pydirectinput.keyUp("4")
                 sleep(1)
             try:
                 Buff_1 = pyautogui.locateOnScreen('./1920x1080/Buff_1.png', confidence=0.999, region=region_fetch_socket,grayscale=False)
@@ -209,9 +207,9 @@ def auto_skill():
                 Buff_1 = None
             if Buff_1 == None:
                 sleep(0.1)
-                pydirectinput.keyDown("4")
+                pydirectinput.keyDown("5")
                 sleep(0.1)
-                pydirectinput.keyUp("4")
+                pydirectinput.keyUp("5")
                 sleep(1)
             try:
                 Buff_2 = pyautogui.locateOnScreen('./1920x1080/Buff_2.png', confidence=0.999, region=region_fetch_socket,grayscale=False)
@@ -219,9 +217,9 @@ def auto_skill():
                 Buff_2 = None
             if Buff_2 == None:
                 sleep(0.1)
-                pydirectinput.keyDown("5")
+                pydirectinput.keyDown("6")
                 sleep(0.1)
-                pydirectinput.keyUp("5")
+                pydirectinput.keyUp("6")
                 sleep(1)
             try:
                 Buff_3 = pyautogui.locateOnScreen('./1920x1080/Buff_3.png', confidence=0.999, region=region_fetch_socket,grayscale=False)
@@ -229,47 +227,11 @@ def auto_skill():
                 Buff_3 = None
             if Buff_3 == None:
                 sleep(0.1)
-                pydirectinput.keyDown("6")
+                pydirectinput.keyDown("7")
                 sleep(0.1)
-                pydirectinput.keyUp("6")
+                pydirectinput.keyUp("7")
                 sleep(1)               
         sleep(tick)
-
-# def check_for_revival():
-#     try:
-#         button7location = pyautogui.locateOnScreen('./1920x1080/dialog.png', confidence=0.6)
-#     except:
-#         button7location = None
-#     global current_slot
-#     global die_count
-#     global last_killed_at
-#     global running
-#     global revising
-#     if button7location:
-#         running = False
-#         revising = True
-#         current_time = datetime.now()
-#         die_count += 1
-#         sleep(0.1)
-#         pydirectinput.press("a")
-#         sleep(0.1)
-#         pydirectinput.press("e")
-#         sleep(0.1)
-#         pydirectinput.press("s")
-#         sleep(0.1)
-#         # slots = go_to_s2
-
-#         # slot_to_go = random.choice(slots)
-            
-#         # last_killed_at = current_time
-#         # pydirectinput.press('esc')
-#         # sleep(1)
-
-        
-#         # eval(f"{slot_to_go}()")
-#         # pydirectinput.keyDown("s")
-#         revising = False
-#         running = True
 
 def check_for_revival():
     try:
