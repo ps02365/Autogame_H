@@ -33,11 +33,11 @@ pydirectinput.FAILSAFE = False
 
 # Notification title and message
 title = "Notification Title"
-message = "This is a notification message!"
+message = "abc!"
 
 # Display the notification
 notification.notify(
     title=title,
     message=message,
-    timeout=10  # Notification will disappear after 10 seconds
+    timeout=2  # Notification will disappear after 10 seconds
 )

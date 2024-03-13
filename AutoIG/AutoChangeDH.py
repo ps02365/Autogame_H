@@ -14,12 +14,13 @@ def trigger_change_form_status():
     global change_form_enable
     change_form_enable = not change_form_enable
     if not change_form_enable:
-        title = "Trạng thái đổi đội hình"
+        title = ""
         message = "Không cho phép đổi đội hình"
-        notification.notify(title=title,message=message,timeout=2)
-    title = "Trạng thái đổi đội hình"
+        notification.notify(title=title,message=message,timeout=1)
+        return
+    title = ""
     message = "Cho phép đổi đội hình"
-    notification.notify(title=title,message=message,timeout=2)                
+    notification.notify(title=title,message=message,timeout=1)                
 
 def X_form():
     pyautogui.click(button='left',x=201,y=1049) #change chat channel
@@ -165,8 +166,8 @@ if __name__ == "__main__":
         exit()
     win32gui.SetForegroundWindow(hwd)
     title = "Hướng dẫn đổi đội hình"
-    message = "Space + Ctrl để kích hoạt\n Space + C = Chia damage\n Space + v = Tăng tốc\n Space + x = 0ms"
-    notification.notify(title=title,message=message,timeout=10)
+    message = "Space + Ctrl để kích hoạt\n    Space + C = Chia damage\n    Space + v = Tăng tốc\n    Space + x = 0ms"
+    notification.notify(title=title,message=message,timeout=1)
     keyboard.add_hotkey('ctrl+space',trigger_change_form_status)    
     keyboard.add_hotkey('space+c', hotkey_X)
     keyboard.add_hotkey('space+v', hotkey_Boost)
