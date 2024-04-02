@@ -5,6 +5,7 @@ import win32gui
 import pydirectinput
 import sys
 import signal
+from threading import Thread
 
 pyautogui.FAILSAFE = False
 pydirectinput.FAILSAFE = False
@@ -18,20 +19,107 @@ powered_by =r"""
  |__|   |__|     \___/      \___/     |__|   \____| |_________| 
 
 """
-
+running = True
 change_form_enable = False
 
 def trigger_change_form_status():
     global change_form_enable
     change_form_enable = not change_form_enable
     if not change_form_enable:
+        pydirectinput.keyDown('r')
+        sleep(0.1)
+        pydirectinput.keyUp('r')
+        sleep(0.1)
         print('\nKhông cho phép đổi đội hình')
         return
+    pydirectinput.keyDown('r')
+    sleep(0.1)
+    pydirectinput.keyUp('r')
+    sleep(0.1)
     print('\nCho phép đổi đội hình')           
 
 def signal_handler(sig, frame):
     sys.exit()
 signal.signal(signal.SIGINT, signal_handler)
+
+def auto_ammunition():
+    while True:
+        if running:
+            use_ammunition_box()
+        sleep(0.02)
+
+def use_ammunition_box():
+    try:
+        ammunition = pyautogui.locateOnScreen('./1920x1080/out_of_ammunition.png', confidence=0.6, grayscale= False)
+    except:
+        ammunition = None
+    if ammunition:
+        sleep(0.1)
+        pydirectinput.press("8")
+        sleep(0.1)
+
+def locate_image_tick():
+    try:
+        tick = pyautogui.locateOnScreen('./1920x1080/tick.png', confidence=0.6,grayscale=False)
+        if tick is not None:
+            return tick
+    except Exception as e:
+        print("Not Found Tick", e)
+        return None
+    
+def locate_image_inventory():
+    left = 650     
+    top = 200
+    width = 600
+    height = 300
+    region_to_fetch = (left,top,width,height)
+    try:
+        inventory = pyautogui.locateOnScreen('./1920x1080/inventory.png',region_to_fetch, confidence=0.3,grayscale=False)
+        if inventory is not None:
+            return inventory
+    except Exception as e:
+        print("Not Found Inventory", e)
+        return None
+
+image_position_tick = locate_image_tick()
+if image_position_tick:
+    left_1, top_1, width_1, height_1 = image_position_tick
+
+image_position_inventory = locate_image_inventory()
+if image_position_inventory:
+    left_2, top_2, width_2, height_2 = image_position_inventory
+
+def Stop():
+    pydirectinput.press('a')
+    sleep(0.1)
+    pydirectinput.press('a')
+    sleep(0.1)
+    pydirectinput.keyDown('b')
+    sleep(0.1)
+    pydirectinput.keyUp('b')
+    sleep(0.1)
+    pyautogui.click(left_1+15,top_1+20) #click dừng
+    sleep(0.1)
+
+def Accuracy():
+    pyautogui.doubleClick(left_2+15,top_2+20) #Giáp
+    sleep(0.1)
+    pyautogui.doubleClick(left_2+15,top_2+20) #Twin 
+    sleep(0.1)
+    pyautogui.doubleClick(left_2+15,top_2+20) #3u
+    sleep(0.1)
+    pyautogui.doubleClick(left_2+15,top_2+20) #bùa
+    sleep(0.1)
+
+def Pierce():
+    pyautogui.doubleClick(left_2+15,top_2+20) #Giáp
+    sleep(0.1)
+    pyautogui.doubleClick(left_2+15,top_2+20) #Twin 
+    sleep(0.1)
+    pyautogui.doubleClick(left_2+15,top_2+20) #3u
+    sleep(0.1)
+    pyautogui.doubleClick(left_2+15,top_2+20) #bùa
+    sleep(0.1)   
 
 def X_form():
     pyautogui.click(button='left',x=201,y=1049) #change chat channel
@@ -176,6 +264,10 @@ if __name__ == "__main__":
     sleep(1)
     print ("\nHướng dẫn đổi đội hình\nSpace + Ctrl để kích hoạt\n    Space + C = Chia damage\n    Space + V = Tăng tốc\n    Space + X = 0ms\nSpace + ESC để tắt")
     sleep(1)
+    auto_ammunition_process = Thread(target=auto_ammunition, daemon=True)
+    auto_ammunition_process.start()
+    print('\nKích hoạt tự động nạp đạn')
+    sleep(0.5)
     input("\nBấm Enter để trở về game!")
     sleep(0.5)
     print('\nBắt đầu')

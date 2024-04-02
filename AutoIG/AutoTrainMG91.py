@@ -5,7 +5,6 @@ import pygetwindow as gw
 import random
 from datetime import datetime
 from threading import Thread
-import cv2
 import numpy as np
 
 die_count = 0
