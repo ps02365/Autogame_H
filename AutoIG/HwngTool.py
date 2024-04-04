@@ -21,6 +21,23 @@ powered_by =r"""
 """
 running = True
 change_form_enable = False
+roll_enable = False
+
+def trigger_change_roll_status():
+    global roll_enable
+    roll_enable = not roll_enable
+    if not roll_enable:
+        pydirectinput.keyDown('r')
+        sleep(0.1)
+        pydirectinput.keyUp('r')
+        sleep(0.1)
+        print('\nKhông cho phép roll')
+        return
+    pydirectinput.keyDown('r')
+    sleep(0.1)
+    pydirectinput.keyUp('r')
+    sleep(0.1)
+    print('\nCho phép roll')           
 
 def trigger_change_form_status():
     global change_form_enable
@@ -59,67 +76,153 @@ def use_ammunition_box():
         sleep(0.1)
 
 def locate_image_tick():
+    left = 640     
+    top = 432
+    width = 640
+    height = 216
+    region_to_fetch = (left,top,width,height)
     try:
-        tick = pyautogui.locateOnScreen('./1920x1080/tick.png', confidence=0.6,grayscale=False)
+        tick = pyautogui.locateOnScreen('./1920x1080/tick.png', region=region_to_fetch, confidence=0.6,grayscale=False)
         if tick is not None:
             return tick
     except Exception as e:
         print("Not Found Tick", e)
-        return None
+        return Not_Found_Tick()
     
-def locate_image_inventory():
-    left = 650     
-    top = 200
-    width = 600
-    height = 300
+def locate_image_arrange():
+    left = 900     
+    top = 650
+    width = 300
+    height = 220
     region_to_fetch = (left,top,width,height)
     try:
-        inventory = pyautogui.locateOnScreen('./1920x1080/inventory.png',region_to_fetch, confidence=0.3,grayscale=False)
+        inventory = pyautogui.locateOnScreen('./1920x1080/arrange.png',region=region_to_fetch, confidence=0.7,grayscale=False)
         if inventory is not None:
             return inventory
     except Exception as e:
-        print("Not Found Inventory", e)
-        return None
+        print("Not Found Arrange", e)
+        return Not_Found_Arrange()
 
-image_position_tick = locate_image_tick()
-if image_position_tick:
-    left_1, top_1, width_1, height_1 = image_position_tick
+def Not_Found_Tick():
+    pydirectinput.keyDown("esc")    
+    sleep(0.05)
+    pydirectinput.keyUp("esc")  
+    sleep(0.05)
+    pydirectinput.keyDown("b")    
+    sleep(0.05)
+    pydirectinput.keyUp("b")
+    sleep(0.05)
+    locate_image_tick()   
 
-image_position_inventory = locate_image_inventory()
-if image_position_inventory:
-    left_2, top_2, width_2, height_2 = image_position_inventory
+def Not_Found_Arrange():
+    pydirectinput.keyDown("esc")    
+    sleep(0.05)
+    pydirectinput.keyUp("esc")  
+    sleep(0.05)
+    pydirectinput.keyDown("i")    
+    sleep(0.05)
+    pydirectinput.keyUp("i")
+    sleep(0.05)
+    locate_image_arrange()
 
 def Stop():
-    pydirectinput.press('a')
-    sleep(0.1)
-    pydirectinput.press('a')
-    sleep(0.1)
+    sleep(0.05)
     pydirectinput.keyDown('b')
-    sleep(0.1)
+    sleep(0.05)
     pydirectinput.keyUp('b')
-    sleep(0.1)
-    pyautogui.click(left_1+15,top_1+20) #click dừng
-    sleep(0.1)
-
+    sleep(0.05)
+    image_position_tick = locate_image_tick()
+    if image_position_tick:
+        left, top, width, height = image_position_tick
+    pyautogui.click(left+15,top+20) 
+    sleep(0.05)
+    pydirectinput.keyDown("i")    
+    sleep(0.05)
+    pydirectinput.keyUp("i")  
+    
 def Accuracy():
-    pyautogui.doubleClick(left_2+15,top_2+20) #Giáp
-    sleep(0.1)
-    pyautogui.doubleClick(left_2+15,top_2+20) #Twin 
-    sleep(0.1)
-    pyautogui.doubleClick(left_2+15,top_2+20) #3u
-    sleep(0.1)
-    pyautogui.doubleClick(left_2+15,top_2+20) #bùa
-    sleep(0.1)
+    if not roll_enable:
+        return    
+    Stop()
+    sleep(0.05)
+    image_position_inventory = locate_image_arrange()
+    if image_position_inventory:
+        # print("Image found at:", image_position_inventory)
+        print('Roll CX')
+        left, top, width, height = image_position_inventory 
+    pyautogui.doubleClick(left-270,top-225)
+    pyautogui.doubleClick(left-300,top-225)
+    sleep(0.05)
+    pyautogui.doubleClick(left-300,top-225)
+    pyautogui.doubleClick(left-300,top-225)
+    sleep(0.05)
+    pyautogui.doubleClick(left-300,top-200)
+    pyautogui.doubleClick(left-300,top-200)
+    sleep(0.05)
+    pyautogui.doubleClick(left-270,top-200)
+    pyautogui.doubleClick(left-270,top-200)  
+    sleep(0.05)
+    pydirectinput.keyDown('c')
+    sleep(0.05)
+    pydirectinput.keyUp('c')
+
+def Accuracy_VIP():
+    if not roll_enable:
+        return    
+    Stop()
+    sleep(0.05)
+    image_position_inventory = locate_image_arrange()
+    if image_position_inventory:
+        # print("Image found at:", image_position_inventory)
+        print('Roll CX')
+        left, top, width, height = image_position_inventory 
+    pyautogui.doubleClick(left-10,top-300)
+    sleep(0.05)
+    pyautogui.doubleClick(left-270,top-200) 
+    sleep(0.05)
+    pydirectinput.keyDown('c')
+    sleep(0.05)
+    pydirectinput.keyUp('c')    
 
 def Pierce():
-    pyautogui.doubleClick(left_2+15,top_2+20) #Giáp
-    sleep(0.1)
-    pyautogui.doubleClick(left_2+15,top_2+20) #Twin 
-    sleep(0.1)
-    pyautogui.doubleClick(left_2+15,top_2+20) #3u
-    sleep(0.1)
-    pyautogui.doubleClick(left_2+15,top_2+20) #bùa
-    sleep(0.1)   
+    if not roll_enable:
+        return   
+    Stop()
+    sleep(0.05)
+    image_position_inventory = locate_image_arrange()
+    if image_position_inventory:
+        # print("Image found at:", image_position_inventory)
+        print('Roll XP')
+        left, top, width, height = image_position_inventory 
+    pyautogui.doubleClick(left-170,top-225)
+    sleep(0.12)
+    pyautogui.doubleClick(left-200,top-225)
+    sleep(0.12)
+    pyautogui.doubleClick(left-200,top-200)
+    sleep(0.12)
+    pyautogui.doubleClick(left-170,top-200) 
+    sleep(0.05)
+    pydirectinput.keyDown('c')
+    sleep(0.05)
+    pydirectinput.keyUp('c')
+
+def Pierce_VIP():
+    if not roll_enable:
+        return   
+    Stop()
+    sleep(0.05)
+    image_position_inventory = locate_image_arrange()
+    if image_position_inventory:
+        # print("Image found at:", image_position_inventory)
+        print('Roll XP')
+        left, top, width, height = image_position_inventory 
+    pyautogui.doubleClick(left,top-300)
+    sleep(0.05)
+    pyautogui.doubleClick(left-200,top-200)
+    sleep(0.05)
+    pydirectinput.keyDown('c')
+    sleep(0.05)
+    pydirectinput.keyUp('c') 
 
 def X_form():
     pyautogui.click(button='left',x=201,y=1049) #change chat channel
@@ -161,48 +264,6 @@ def ChangeLeader():
     pyautogui.click(button='left',x=960,y=540) #Move to Central
     keyupR()
 
-# def ChangeLeaderSlot1():
-#     pyautogui.click(button='left',x=1024,y=516) #Choose leader
-#     pyautogui.click(button='left',x=1175,y=691) #Authorize
-#     pyautogui.click(button='left',x=939,y=554) #Accpept
-#     keyupR()
-#     pyautogui.press('esc') #Exit F7
-
-# def ChangeLeaderSlot2():
-#     pyautogui.click(button='left',x=1024,y=533) #Choose leader
-#     pyautogui.click(button='left',x=1175,y=691) #Authorize
-#     pyautogui.click(button='left',x=939,y=554) #Accpept
-#     keyupR()
-#     pyautogui.press('esc') #Exit F7
-
-# def ChangeLeaderSlot3():
-#     pyautogui.click(button='left',x=1024,y=550) #Choose leader
-#     pyautogui.click(button='left',x=1175,y=691) #Authorize
-#     pyautogui.click(button='left',x=939,y=554) #Accpept
-#     keyupR()
-#     pyautogui.press('esc') #Exit F7
-
-# def ChangeLeaderSlot4():
-#     pyautogui.click(button='left',x=1024,y=566) #Choose leader
-#     pyautogui.click(button='left',x=1175,y=691) #Authorize
-#     pyautogui.click(button='left',x=939,y=554) #Accpept
-#     keyupR()
-#     pyautogui.press('esc') #Exit F7
-
-# def ChangeLeaderSlot5():
-#     pyautogui.click(button='left',x=1024,y=582) #Choose leader
-#     pyautogui.click(button='left',x=1175,y=691) #Authorize
-#     pyautogui.click(button='left',x=939,y=554) #Accpept
-#     keyupR()
-#     pyautogui.press('esc') #Exit F7
-
-# def ChangeLeaderSlot6():
-#     pyautogui.click(button='left',x=1024,y=597) #Choose leader
-#     pyautogui.click(button='left',x=1175,y=691) #Authorize
-#     pyautogui.click(button='left',x=939,y=554) #Accpept
-#     keyupR()
-#     pyautogui.press('esc') #Exit F7
-
 def keydownR():
     pydirectinput.keyDown('r')
 
@@ -233,37 +294,12 @@ def hotkey_changeLeader():
     keydownR()
     ChangeLeader()
 
-# def hotkey_change_leader_slot1():
-#     keydownR()
-#     ChangeLeaderSlot1()
-
-# def hotkey_change_leader_slot2():
-#     keydownR()
-#     ChangeLeaderSlot2()
-
-# def hotkey_change_leader_slot3():
-#     keydownR()
-#     ChangeLeaderSlot3()
-
-# def hotkey_change_leader_slot4():
-#     keydownR()
-#     ChangeLeaderSlot4()
-
-# def hotkey_change_leader_slot5():
-#     keydownR()
-#     ChangeLeaderSlot5()
-
-# def hotkey_change_leader_slot6():
-#     keydownR()
-#     ChangeLeaderSlot6()
-
-
 if __name__ == "__main__":
     print (powered_by)
     print ("Powered by Hwng")
-    sleep(1)
+    sleep(0.5)
     print ("\nHướng dẫn đổi đội hình\nSpace + Ctrl để kích hoạt\n    Space + C = Chia damage\n    Space + V = Tăng tốc\n    Space + X = 0ms\nSpace + ESC để tắt")
-    sleep(1)
+    sleep(0.5)
     auto_ammunition_process = Thread(target=auto_ammunition, daemon=True)
     auto_ammunition_process.start()
     print('\nKích hoạt tự động nạp đạn')
@@ -280,16 +316,13 @@ if __name__ == "__main__":
         sleep(2)
         exit()
     win32gui.SetForegroundWindow(hwd)
+    keyboard.add_hotkey('ctrl+alt',trigger_change_roll_status)
+    keyboard.add_hotkey('ctrl+x',Pierce)
+    keyboard.add_hotkey('ctrl+z',Accuracy)
     keyboard.add_hotkey('ctrl+space',trigger_change_form_status)    
     keyboard.add_hotkey('space+c', hotkey_X)
     keyboard.add_hotkey('space+v', hotkey_Boost)
     keyboard.add_hotkey('space+x', hotkey_Zero)
     keyboard.add_hotkey('space+z', hotkey_changeLeader)
     keyboard.add_hotkey('space+esc', signal.raise_signal, args=(signal.SIGINT,))
-    # keyboard.add_hotkey('num 1', hotkey_change_leader_slot1)
-    # keyboard.add_hotkey('num 2', hotkey_change_leader_slot2)
-    # keyboard.add_hotkey('num 3', hotkey_change_leader_slot3)
-    # keyboard.add_hotkey('num 4', hotkey_change_leader_slot4)
-    # keyboard.add_hotkey('num 5', hotkey_change_leader_slot5)
-    # keyboard.add_hotkey('num 6', hotkey_change_leader_slot6)
     keyboard.wait()

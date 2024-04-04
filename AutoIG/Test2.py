@@ -86,16 +86,14 @@ def screenshot2():
     region_to_fetch = (left,top,width,height)
     pyautogui.screenshot("Test_screenshot_2.png",region = region_to_fetch)
 
-def locate_image_tick():
-    try:
-        tick = pyautogui.locateOnScreen('./1920x1080/tick.png', confidence=0.6,grayscale=False)
-        if tick is not None:
-            return tick
-    except Exception as e:
-        print("Not Found Tick", e)
-        return None
 
 def open_inventoy():
+    pydirectinput.keyDown('b')
+    sleep(0.1)
+    pydirectinput.keyUp('b')
+    sleep(0.1)
+    pyautogui.click(left_1+15,top_1+20) #click dừng
+    sleep(0.1)
     pydirectinput.keyDown("i")    
     sleep(0.01)
     pydirectinput.keyUp("i")    
@@ -115,38 +113,56 @@ def locate_image_inventory():
         print("Not Found Inventory", e)
         return None
 
-def screenshot(left_2,top_2,width_2, height_2):
-    left = int(left_2)
-    top = int(top_2)
-    width= int(width_2)
-    height = int(height_2)
-    region_to_fetch = (left,top,width, height)
-    print(region_to_fetch)
-    pyautogui.screenshot("Test_screenshot.png",region_to_fetch) 
 
+def locate_image_tick():
+    left = 640     
+    top = 432
+    width = 640
+    height = 216
+    region_to_fetch = (left,top,width,height)
+    try:
+        tick = pyautogui.locateOnScreen('./1920x1080/tick.png', region = region_to_fetch, confidence=0.6,grayscale=False)
+        if tick is not None:
+            return tick
+    except Exception as e:
+        print("Not Found Tick", e)
+        return locate_image_tick()
 
-if __name__ == "__main__":
-    hwd = win32gui.FindWindow(None, "DreamACE")
-    if not hwd:
-        exit()
-    win32gui.SetForegroundWindow(hwd)
-    sleep(1)
-    open_inventoy()   
-    sleep(0.5)
+def Stop():
+    # pydirectinput.keyDown('b')
+    # sleep(0.1)
+    # pydirectinput.keyUp('b')
+    # sleep(0.1)
+    image_position_tick = locate_image_tick()
+    if image_position_tick:
+        left_1, top_1, width_1, height_1 = image_position_tick
+    # pyautogui.click(left_1+15,top_1+20) 
+    # sleep(0.05)
+    # pydirectinput.keyDown("i")    
+    # sleep(0.05)
+    # pydirectinput.keyUp("i")    
+
+def Accuracy():
+    # Stop()
+    # sleep(0.05)
     image_position_inventory = locate_image_inventory()
     if image_position_inventory:
         print("Image found at:", image_position_inventory)
-        left_2, top_2, width_2, height_2 = image_position_inventory
-    pyautogui.doubleClick(left_2,top_2)
-    sleep(0.1)   
-    pyautogui.doubleClick(left_2-270,top_2-225)
+        left_2, top_2, width_2, height_2 = image_position_inventory 
+    pyautogui.moveTo(left_2-170,top_2-225)
+    sleep(1)
+    pyautogui.moveTo(left_2-200,top_2-225)
+    sleep(1)
+    pyautogui.moveTo(left_2-200,top_2-200)
+    sleep(1)
+    pyautogui.moveTo(left_2-170,top_2-200)
+
+if __name__ == "__main__":
+    # hwd = win32gui.FindWindow(None, "DreamACE")
+    # if not hwd:
+    #     exit()
+    # win32gui.SetForegroundWindow(hwd)
     sleep(0.1)
-    pyautogui.doubleClick(left_2-300,top_2-225)
-    sleep(0.1)
-    pyautogui.doubleClick(left_2-300,top_2-200)
-    sleep(0.1)
-    pyautogui.doubleClick(left_2-270,top_2-200)
-    # sleep(0.1)
-    # screenshot(left_2,top_2,width_2, height_2)
-    # sleep(0.5)
-    # screenshot2()
+    # Accuracy()
+    Stop()
+
