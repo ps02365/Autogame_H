@@ -67,17 +67,17 @@ def auto_ammunition():
     while True:
         if running:
             use_ammunition_box()
-        sleep(1)
+        sleep(0.5)
 
 def use_ammunition_box():
     left = 0     
     top = 0
-    width = 350
-    height = 50
+    width = 240
+    height = 30
     region_to_fetch = (left,top,width,height)   
     try:
-        ammunition = pyautogui.locateOnScreen('./1920x1080/out_of_ammunition.png', region = region_to_fetch, confidence=0.7, grayscale= False)
-    except:
+        ammunition = pyautogui.locateOnScreen('./1920x1080/out_of_ammunition.png', region = region_to_fetch, confidence=0.9, grayscale= False)
+    except: 
         ammunition = None
     if ammunition:
         sleep(0.1)
@@ -320,9 +320,11 @@ def ChangeLeader():
     keyupR()
 
 def keydownR():
+    sleep(0.01)
     pydirectinput.keyDown('r')
 
 def keyupR():
+    sleep(0.01)
     pydirectinput.keyUp('r')
 
 def hotkey_X():
@@ -352,8 +354,9 @@ def hotkey_changeLeader():
 if __name__ == "__main__":
     print (powered_by)
     print ("Powered by Hwng")
+    print ("\nLast Updated 020524")
     sleep(0.5)
-    print ("\nHướng dẫn đổi đội hình\nF1 để kích hoạt\n    Space + Z = Giao diện đội hình\n    Space + C = Chia damage\n    Space + V = Tăng tốc\n    Space + X = 0ms\nSpace + ALT để tắt")
+    print ("\nHướng dẫn đổi đội hình\nSpace + F1 để kích hoạt\n    Space + Z = Giao diện đội hình\n    Space + C = Chia damage\n    Space + V = Tăng tốc\n    Space + X = 0ms\nSpace + F4 để tắt")
     sleep(0.5)
     auto_ammunition_process = Thread(target=auto_ammunition, daemon=True)
     auto_ammunition_process.start()
@@ -364,6 +367,8 @@ if __name__ == "__main__":
     print('\nBắt đầu')
     sleep(0.5)
     hwd = win32gui.FindWindow(None, "DreamACE")
+    sleep(0.5)
+    pyautogui.moveTo(x=960, y=540)
     if not hwd:
         print ('\nKhông tìm thấy game.')
         sleep(1)
@@ -375,15 +380,15 @@ if __name__ == "__main__":
         sleep(1)
         exit()
     win32gui.SetForegroundWindow(hwd)
-    keyboard.add_hotkey('F5',trigger_change_roll_status)
+    keyboard.add_hotkey('space+F5',trigger_change_roll_status)
     keyboard.add_hotkey('ctrl+z',PVE)
-    keyboard.add_hotkey('ctrl+v',Accuracy)
-    keyboard.add_hotkey('ctrl+c',Pierce)
-    keyboard.add_hotkey('ctrl+x',DMG)
-    keyboard.add_hotkey('F1',trigger_change_form_status)   
+    keyboard.add_hotkey('ctrl+q',Accuracy)
+    keyboard.add_hotkey('ctrl+d',Pierce)
+    keyboard.add_hotkey('ctrl+e',DMG)
+    keyboard.add_hotkey('space+F1',trigger_change_form_status)   
     keyboard.add_hotkey('space+c', hotkey_X)
     keyboard.add_hotkey('space+v', hotkey_Boost)
     keyboard.add_hotkey('space+x', hotkey_Zero)
     keyboard.add_hotkey('space+z', hotkey_changeLeader)
-    keyboard.add_hotkey('space+alt', signal.raise_signal, args=(signal.SIGINT,))
+    keyboard.add_hotkey('space+F4', signal.raise_signal, args=(signal.SIGINT,))
     keyboard.wait()

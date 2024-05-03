@@ -5,7 +5,17 @@ import pygetwindow as gw
 import random
 from datetime import datetime
 from threading import Thread
-import numpy as np
+import win32gui
+
+powered_by =r"""
+  __     __  ___       ____       ___  _____    __   _________  
+ |  |   |  | \  \     /    \     /  / |     \  |  | |   ______|  
+ |  |___|  |  \  \   /  /\  \   /  /  |  |\  \ |  | |  |  ____  
+ |   ___   |   \  \ /  /  \  \ /  /   |  | \  \|  | |  | |_   | 
+ |  |   |  |    \  V  /    \  V  /    |  |  \  \  | |  |___|  | 
+ |__|   |__|     \___/      \___/     |__|   \____| |_________| 
+
+"""
 
 die_count = 0
 current_slot = 2
@@ -14,11 +24,50 @@ running = True
 revising = False
 start_die_time = time()
 def start_game():
-    gw.getWindowsWithTitle('DreamACE')[0].activate()
-    sleep(1)
-    
+    print(powered_by)
+    print ("Powered by Hwng")
+    hwd = win32gui.FindWindow(None, "DreamACE")
     start_auto()
 
+
+    
+def start_auto():
+    start_die_time = time()
+    auto_skill_MG_process = Thread(target=auto_skill_MG, daemon=True)
+    auto_skill_MG_process.start()
+
+    auto_ammunition_process = Thread(target=auto_ammunition, daemon=True)
+    auto_ammunition_process.start()
+
+    auto_high_down_process = Thread(target=auto_high_down, daemon=True)
+    auto_high_down_process.start()
+
+    auto_refuel_process = Thread(target=auto_refuel, daemon=True)
+    auto_refuel_process.start()
+
+    rightmove = ((1920/8)*7)   
+    run_air_plane()
+    position_air_plane()
+    speed_down_air_plane()
+    fire()
+    for i in range(100000000):
+        check_for_revival()
+        if running:
+            position_air_plane(i)
+            if i % 2 == 0:
+                release_fire()
+                release_down_air_plane()
+            position_air_plane(i)
+            # if time() - start_die_time > 1800:
+            #     auto_die()
+            #     sleep(1)
+            #     start_die_time = time()
+            #     sleep(1)
+            # position_air_plane(i)
+            pyautogui.moveTo(rightmove, 500)
+        sleep(0.2)
+
+    
 def auto_die():
     global running
     pydirectinput.press("e")
@@ -42,41 +91,6 @@ def auto_die():
     sleep(0.5)
     pydirectinput.press('s')
     sleep(0.5)
-    
-def start_auto():
-    start_die_time = time()
-    auto_skill_process = Thread(target=auto_skill, daemon=True)
-    auto_skill_process.start()
-
-    auto_ammunition_process = Thread(target=auto_ammunition, daemon=True)
-    auto_ammunition_process.start()
-
-    auto_high_down_process = Thread(target=auto_high_down, daemon=True)
-    auto_high_down_process.start()
-
-    auto_refuel_process = Thread(target=auto_refuel, daemon=True)
-    auto_refuel_process.start()
-
-    run_air_plane()
-    position_air_plane()
-    speed_down_air_plane()
-    fire()
-    for i in range(100000000):
-        check_for_revival()
-        if running:
-            position_air_plane(i)
-            if i % 2 == 0:
-                release_fire()
-                release_down_air_plane()
-            position_air_plane(i)
-            if time() - start_die_time > 1800:
-                auto_die()
-                sleep(0.5)
-                start_die_time = time()
-                sleep(0.5)
-            position_air_plane(i)
-        sleep(0.2)
-
 
 def auto_refuel():
     tick = 60
@@ -125,11 +139,11 @@ def high_up():
 
 def auto_high_down():
     tick = 1
-    right = 1889     
+    left = 1889     
     top = 255
     width = 19
     height = 60
-    region_to_fetch = (right,top, width,height)
+    region_to_fetch = (left,top, width,height)
     sleep(15)
     global running
     while True:
@@ -155,9 +169,47 @@ def auto_high_down():
                 running = True
         sleep(tick)
 
-def auto_skill():
+def auto_skill_IG():
     tick = 0.01
-    region_fetch_socket = (245, 0, 580, 24)
+    region_fetch_socket = (245, 0, 1000, 24)
+    while True:
+        if running:
+            try:
+                skill_socket = pyautogui.locateOnScreen('./1920x1080/skill_socket.png', confidence=0.999, region=region_fetch_socket,grayscale=False)
+            except:
+                skill_socket = None
+            if skill_socket == None:
+                sleep(0.1)
+                pydirectinput.keyDown("9")
+                sleep(0.1)
+                pydirectinput.keyUp("9")
+                sleep(1)
+            try:
+                kit_socket = pyautogui.locateOnScreen('./1920x1080/kit_socket.png', confidence=0.999, region=region_fetch_socket,grayscale=False)
+            except:
+                kit_socket = None
+            if kit_socket == None:
+                sleep(0.1)
+                pydirectinput.keyDown("0")
+                sleep(0.1)
+                pydirectinput.keyUp("0")
+                sleep(1)
+            try:
+                Ber = pyautogui.locateOnScreen('./1920x1080/Ber.png', confidence=0.999, region=region_fetch_socket,grayscale=False)
+            except:
+                Ber = None
+            if Ber == None:
+                sleep(0.1)
+                pydirectinput.keyDown("6")
+                sleep(0.1)
+                pydirectinput.keyUp("6")
+                sleep(1)
+        sleep(tick)
+        
+
+def auto_skill_MG():
+    tick = 0.01
+    region_fetch_socket = (245, 0, 1000, 24)
     while True:
         if running:
             try:
@@ -252,13 +304,14 @@ def check_for_revival():
         pydirectinput.press('esc')
         sleep(1)
         # go_to_s2()
+        go_to_s1_redline
         revising = False
         running = True
-        slots = [
-            'go_to_s2',
-            'go_to_s5']
-        slot_to_go = random.choice(slots)
-        eval(f"{slot_to_go}()")
+        # slots = [
+        #     'go_to_s2',
+        #     'go_to_s5']
+        # slot_to_go = random.choice(slots)
+        # eval(f"{slot_to_go}()")
 
 # def go_to_s4():
 #     sleep(1.5)
@@ -273,6 +326,26 @@ def check_for_revival():
 #     pyautogui.moveTo(960, 540)
 #     sleep(10)
 
+def go_to_s1_redline():
+    pydirectinput.keyDown('space')
+    sleep(1)
+    pyautogui.moveTo((1920/10)*5.5, 540)
+    sleep(2.5)    
+    pydirectinput.keyUp('space')
+    sleep(0.5)
+    pydirectinput.keyDown('s')
+
+def go_to_s3_redline():
+    pyautogui.moveTo((1920/8)*5, 540)
+    sleep(2)
+    pyautogui.moveTo(960, 540)
+    sleep(0.5)
+    pydirectinput.keyDown('space')
+    sleep(10)
+    pydirectinput.keyUp('space')
+    sleep(0.5)
+    pydirectinput.keyDown('s')
+    
 def go_to_s2():
     pydirectinput.keyDown('space')
     sleep(2.5)
@@ -381,21 +454,6 @@ def use_ammunition_box():
         pydirectinput.press("8")
         sleep(0.1)
 
-# def use_hyper_moving():
-#     hyper_moving = pyautogui.locateOnScreen('hyper_moving.png', confidence=0.9)
-#     if hyper_moving:
-#         sleep(0.1)
-#         pydirectinput.press("1")
-#         sleep(0.1)
-
-# def use_ber():
-#     ber = pyautogui.locateOnScreen('ber.png', confidence=0.9)
-#     if ber:
-#         sleep(0.1)
-#         pydirectinput.press("2")
-#         sleep(0.1)
-
-
 def fire():
     sleep(0.3)
     pydirectinput.keyDown("e")
@@ -414,7 +472,7 @@ def speed_down_air_plane():
     sleep(0.1)
 
 def position_air_plane(i = -1):
-    right_move = 1600
+    right_move = 1680
     pyautogui.moveTo(right_move, 535)
     sleep(0.1)
 
