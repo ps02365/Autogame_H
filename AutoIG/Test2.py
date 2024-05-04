@@ -88,7 +88,10 @@ def screenshot2():
 
 
 if __name__ == "__main__":
-    gw.getWindowsWithTitle('DreamACE')[0].activate()
+    hwd = win32gui.FindWindow(None, "DreamACE")
+    if not hwd:
+        exit()
+    win32gui.SetForegroundWindow(hwd)
     sleep(1)
     screenshot2()
 

@@ -6,6 +6,7 @@ import pydirectinput
 import sys
 import signal
 from threading import Thread
+import configparser
 
 pyautogui.FAILSAFE = False
 pydirectinput.FAILSAFE = False
@@ -16,12 +17,15 @@ powered_by =r"""
  |  |___|  |  \  \   /  /\  \   /  /  |  |\  \ |  | |  |  ____  
  |   ___   |   \  \ /  /  \  \ /  /   |  | \  \|  | |  | |_   | 
  |  |   |  |    \  V  /    \  V  /    |  |  \  \  | |  |___|  | 
- |__|   |__|     \___/      \___/     |__|   \____| |_________| 
+ |__|   |__|     \___/      \___/     |__|   \____| |_________|
 
 """
+
 running = True
 change_form_enable = False
 roll_enable = False
+# config = configparser.ConfigParser()
+# config.read('config.ini')
 
 def trigger_change_roll_status():
     global roll_enable
@@ -70,10 +74,10 @@ def auto_ammunition():
         sleep(0.5)
 
 def use_ammunition_box():
-    left = 0     
+    left = 0    
     top = 0
-    width = 240
-    height = 30
+    width = 320
+    height = 50
     region_to_fetch = (left,top,width,height)   
     try:
         ammunition = pyautogui.locateOnScreen('./1920x1080/out_of_ammunition.png', region = region_to_fetch, confidence=0.9, grayscale= False)
@@ -139,6 +143,7 @@ def Stop():
     # sleep(tick)
     pydirectinput.keyUp("i")  
 
+#Trái sang phải, trên xuống dưới
 def Accuracy():
     tick =0
     if not roll_enable:
@@ -151,16 +156,16 @@ def Accuracy():
         print('Roll CX')
         left, top, width, height = image_position_inventory
     try:    
+        pyautogui.doubleClick(left-300,top-225) 
+        pyautogui.doubleClick(left-300,top-225)
+        sleep(tick)
+        pyautogui.doubleClick(left-270,top-225) 
         pyautogui.doubleClick(left-270,top-225)
-        pyautogui.doubleClick(left-300,top-225)
         sleep(tick)
-        pyautogui.doubleClick(left-300,top-225)
-        pyautogui.doubleClick(left-300,top-225)
-        sleep(tick)
-        pyautogui.doubleClick(left-300,top-200)
+        pyautogui.doubleClick(left-300,top-200) 
         pyautogui.doubleClick(left-300,top-200)
         sleep(tick)
-        pyautogui.doubleClick(left-270,top-200)
+        pyautogui.doubleClick(left-270,top-200) 
         pyautogui.doubleClick(left-270,top-200)  
         sleep(tick)
         pydirectinput.keyDown('c')
@@ -186,11 +191,11 @@ def Pierce():
         print('Roll XP')
         left, top, width, height = image_position_inventory 
     try:
-        pyautogui.doubleClick(left-170,top-225)
-        pyautogui.doubleClick(left-170,top-225)
+        pyautogui.doubleClick(left-200,top-225)
+        pyautogui.doubleClick(left-200,top-225)
         sleep(tick)
-        pyautogui.doubleClick(left-200,top-225)
-        pyautogui.doubleClick(left-200,top-225)
+        pyautogui.doubleClick(left-170,top-225)
+        pyautogui.doubleClick(left-170,top-225)
         sleep(tick)
         pyautogui.doubleClick(left-200,top-200)
         pyautogui.doubleClick(left-200,top-200)
@@ -206,8 +211,6 @@ def Pierce():
         pydirectinput.keyDown("c")    
         sleep(0.1)
         pydirectinput.keyUp("c")
-        sleep(0.1)
-        pydirectinput.keyDown("space")   
 
 def DMG():
     tick = 0
@@ -221,11 +224,11 @@ def DMG():
         print('Roll DMG')
         left, top, width, height = image_position_inventory 
     try:
-        pyautogui.doubleClick(left-140,top-225)
-        pyautogui.doubleClick(left-140,top-225)
+        pyautogui.doubleClick(left-200,top-225)
+        pyautogui.doubleClick(left-200,top-225)
         sleep(tick)
-        pyautogui.doubleClick(left-200,top-225)
-        pyautogui.doubleClick(left-200,top-225)
+        pyautogui.doubleClick(left-140,top-225)
+        pyautogui.doubleClick(left-140,top-225)
         sleep(tick)
         pyautogui.doubleClick(left-200,top-200)
         pyautogui.doubleClick(left-200,top-200)
@@ -241,8 +244,6 @@ def DMG():
         pydirectinput.keyDown("c")    
         sleep(0.1)
         pydirectinput.keyUp("c")
-        sleep(0.1)
-        pydirectinput.keyDown("space")   
 
 def PVE():
     tick = 0
@@ -262,11 +263,11 @@ def PVE():
         pyautogui.doubleClick(left-110,top-225) #Súng
         pyautogui.doubleClick(left-110,top-225)
         sleep(tick)
-        pyautogui.doubleClick(left-110,top-200) #TL
-        pyautogui.doubleClick(left-110,top-200) 
-        sleep(tick)
         pyautogui.doubleClick(left-270,top-200) #Bùa
         pyautogui.doubleClick(left-270,top-200)  
+        sleep(tick)
+        pyautogui.doubleClick(left-110,top-200) #TL
+        pyautogui.doubleClick(left-110,top-200) 
         sleep(tick)
         pydirectinput.keyDown('c')
         sleep(tick)
@@ -276,8 +277,6 @@ def PVE():
         pydirectinput.keyDown("c")    
         sleep(0.1)
         pydirectinput.keyUp("c")
-        sleep(0.1)
-        pydirectinput.keyDown("space")   
 
 def X_form():
     pyautogui.click(button='left',x=201,y=1049) #change chat channel
@@ -354,7 +353,7 @@ def hotkey_changeLeader():
 if __name__ == "__main__":
     print (powered_by)
     print ("Powered by Hwng")
-    print ("\nLast Updated 020524")
+    print ("\nVersion: 030524")
     sleep(0.5)
     print ("\nHướng dẫn đổi đội hình\nSpace + F1 để kích hoạt\n    Space + Z = Giao diện đội hình\n    Space + C = Chia damage\n    Space + V = Tăng tốc\n    Space + X = 0ms\nSpace + F4 để tắt")
     sleep(0.5)
@@ -367,8 +366,6 @@ if __name__ == "__main__":
     print('\nBắt đầu')
     sleep(0.5)
     hwd = win32gui.FindWindow(None, "DreamACE")
-    sleep(0.5)
-    pyautogui.moveTo(x=960, y=540)
     if not hwd:
         print ('\nKhông tìm thấy game.')
         sleep(1)
@@ -380,6 +377,7 @@ if __name__ == "__main__":
         sleep(1)
         exit()
     win32gui.SetForegroundWindow(hwd)
+    pyautogui.moveTo(x=960, y=540)
     keyboard.add_hotkey('space+F5',trigger_change_roll_status)
     keyboard.add_hotkey('ctrl+z',PVE)
     keyboard.add_hotkey('ctrl+q',Accuracy)
@@ -392,3 +390,28 @@ if __name__ == "__main__":
     keyboard.add_hotkey('space+z', hotkey_changeLeader)
     keyboard.add_hotkey('space+F4', signal.raise_signal, args=(signal.SIGINT,))
     keyboard.wait()
+
+
+    # roll_1 = config['ROLL']['Trigger']
+    # roll_2 = config['ROLL']['PVE']
+    # roll_3 = config['ROLL']['Accuracy']
+    # roll_4 = config['ROLL']['Pierce']    
+    # roll_5 = config['ROLL']['DMG']
+
+    # flightform_1 = config['FLIGHTFORM']['Trigger']
+    # flightform_2 = config['FLIGHTFORM']['Xform']
+    # flightform_3 = config['FLIGHTFORM']['Boostform']
+    # flightform_4 = config['FLIGHTFORM']['Zeroform']
+    # flightform_5 = config['FLIGHTFORM']['Changeleader']
+ 
+    # keyboard.add_hotkey('roll_1',trigger_change_roll_status)
+    # keyboard.add_hotkey('roll_2',PVE)
+    # keyboard.add_hotkey('roll_3',Accuracy)
+    # keyboard.add_hotkey('roll_4',Pierce)
+    # keyboard.add_hotkey('roll_5',DMG)
+    # keyboard.add_hotkey('flightform_1',trigger_change_form_status)   
+    # keyboard.add_hotkey('flightform_2', hotkey_X)
+    # keyboard.add_hotkey('flightform_3', hotkey_Boost)
+    # keyboard.add_hotkey('flightform_4', hotkey_Zero)
+    # keyboard.add_hotkey('flightform_5', hotkey_changeLeader)
+    # keyboard.add_hotkey('space+F4', signal.raise_signal, args=(signal.SIGINT,))

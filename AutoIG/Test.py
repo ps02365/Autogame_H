@@ -8,6 +8,7 @@ import os
 import wmi
 import getpass
 import win32gui
+import random
 
 pyautogui.FAILSAFE = False
 pydirectinput.FAILSAFE = False
@@ -78,6 +79,8 @@ pydirectinput.FAILSAFE = False
 #     key = encrypted_script
 #     nhapkey = getpass.getpass('')
 #     checkkey(nhapkey, key)
+
+
 def screenshot2():
     left = 1100     
     top = 670
@@ -86,44 +89,55 @@ def screenshot2():
     region_to_fetch = (left,top,width,height)
     pyautogui.screenshot("Test_screenshot_2.png",region = region_to_fetch)
 
-def locate_image_tick():
-    try:
-        tick = pyautogui.locateOnScreen('./1920x1080/tick.png', confidence=0.6,grayscale=False)
-        if tick is not None:
-            return tick
-    except Exception as e:
-        print("Not Found Tick", e)
-        return None
 
-def open_inventoy():
-    pydirectinput.keyDown("i")    
-    sleep(0.01)
-    pydirectinput.keyUp("i")    
+def check_for_revival():
+    try:
+        button7location = pyautogui.locateOnScreen('./1920x1080/dialog.png', confidence=0.6,grayscale=False)
+    except:
+        button7location = None
+    global running
+    global revising
+    if button7location:
+        print(1)
+        running = False
+        revising = True
+        sleep(0.1)
+        pydirectinput.press("a")
+        sleep(0.1)
+        pydirectinput.press("e")
+        sleep(0.1)
+        pydirectinput.press("s")
+        sleep(0.1)
+        pydirectinput.press('esc')
+        sleep(1)
+        go_to_s3_redline
+        revising = False
+        running = True
+        # slots = [
+        #     'go_to_s3_redline',
+        #     'go_to_s1_redline']
+        # slot_to_go = random.choice(slots)
+        # eval(f"{slot_to_go}()")
+
+def go_to_s3_redline():
+    pyautogui.moveTo((1920/8)*5, 540)
+    sleep(2)
+    pyautogui.moveTo(960, 540)
     sleep(0.5)
+    pydirectinput.keyDown('space')
+    sleep(10)
+    pydirectinput.keyUp('space')
+    sleep(0.5)
+    pydirectinput.keyDown('s')
 
-def locate_image_inventory():
-    left = 1000     
-    top = 670
-    width = 200
-    height = 200
-    region_to_fetch = (left,top,width,height)
-    try:
-        inventory = pyautogui.locateOnScreen('./1920x1080/arrange.png',region=region_to_fetch, confidence=0.7,grayscale=False)
-        if inventory is not None:
-            return inventory
-    except Exception as e:
-        print("Not Found Inventory", e)
-        return None
-
-def screenshot(left_2,top_2,width_2, height_2):
-    left = int(left_2)
-    top = int(top_2)
-    width= int(width_2)
-    height = int(height_2)
-    region_to_fetch = (left,top,width, height)
-    print(region_to_fetch)
-    pyautogui.screenshot("Test_screenshot.png",region_to_fetch) 
-
+def go_to_s1_redline():
+    pydirectinput.keyDown('space')
+    sleep(1)
+    pyautogui.moveTo((1920/10)*5.5, 540)
+    sleep(2.5)    
+    pydirectinput.keyUp('space')
+    sleep(0.5)
+    pydirectinput.keyDown('s')
 
 if __name__ == "__main__":
     hwd = win32gui.FindWindow(None, "DreamACE")
@@ -131,22 +145,6 @@ if __name__ == "__main__":
         exit()
     win32gui.SetForegroundWindow(hwd)
     sleep(1)
-    open_inventoy()   
-    sleep(0.5)
-    image_position_inventory = locate_image_inventory()
-    if image_position_inventory:
-        print("Image found at:", image_position_inventory)
-        left_2, top_2, width_2, height_2 = image_position_inventory
-    pyautogui.doubleClick(left_2,top_2)
-    sleep(0.1)   
-    pyautogui.doubleClick(left_2-270,top_2-225)
-    sleep(0.1)
-    pyautogui.doubleClick(left_2-300,top_2-225)
-    sleep(0.1)
-    pyautogui.doubleClick(left_2-300,top_2-200)
-    sleep(0.1)
-    pyautogui.doubleClick(left_2-270,top_2-200)
-    # sleep(0.1)
-    # screenshot(left_2,top_2,width_2, height_2)
-    # sleep(0.5)
-    # screenshot2()
+    print (1)
+    check_for_revival()
+    print (2)
