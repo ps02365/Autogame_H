@@ -48,6 +48,7 @@ def trigger_change_roll_status():
     roll_enable = not roll_enable
     if not roll_enable:
         print('\nKhông cho phép roll')
+        sleep(0.1)
         pydirectinput.keyDown('r')
         sleep(0.1)
         pydirectinput.keyUp('r')
@@ -96,6 +97,8 @@ def signal_handler(sig, frame):
 signal.signal(signal.SIGINT, signal_handler)
 
 def auto_ammunition():
+    if not roll_enable:
+        return    
     while True:
         if running:
             use_ammunition_box()
@@ -108,7 +111,7 @@ def use_ammunition_box():
     height = 50
     region_to_fetch = (left,top,width,height)   
     try:
-        ammunition = pyautogui.locateOnScreen('./1920x1080/AdvWeapon.png', region = region_to_fetch, confidence=0.7, grayscale= False)
+        ammunition = pyautogui.locateOnScreen('./1920x1080/out_of_ammunition.png', region = region_to_fetch, confidence=0.9, grayscale= False)
     except: 
         ammunition = None
     if ammunition:
@@ -141,8 +144,8 @@ def locate_image_arrange():
         inventory = pyautogui.locateOnScreen('./1920x1080/arrange.png',region=region_to_fetch, confidence=0.7,grayscale=False)
         if inventory is not None:
             return inventory
-    except Exception as e:
-        print("Not Found Arrange", e)
+    except pyautogui.ImageNotFoundException as e:
+        print("Arrange image not found:", e)
         return 
 
 def Not_Found_Tick():
@@ -172,6 +175,30 @@ def Stop():
     pydirectinput.keyUp("i")  
 
 #Trái sang phải, trên xuống dưới
+
+def slot_1(left_1, top_1):
+    image_position_inventory = locate_image_arrange()
+    if image_position_inventory:
+        left, top, width, height = image_position_inventory
+        left_1 = left
+        top_1 = top
+    else:
+        print("Unable to locate arrange image.")
+
+    return left_1, top_1
+
+left_1,top_1 = slot_1
+# left_2,top_2 = slot_2
+# left_3,top_3 = slot_3
+# left_4,top_4 = slot_4
+# left_5,top_5 = slot_5
+# left_6,top_6 = slot_6
+# left_7,top_7 = slot_7
+# left_8,top_8 = slot_8
+# left_9,top_9 = slot_9
+# left_10,top_10 = slot_10
+
+
 def Accuracy():
     tick =0
     if not roll_enable:
@@ -184,16 +211,16 @@ def Accuracy():
         print('Roll CX')
         left, top, width, height = image_position_inventory
     try:    
-        pyautogui.moveTo(left-300,top-225) 
+        pyautogui.doubleClick(left-300,top-225) 
         pyautogui.doubleClick(left-300,top-225)
         sleep(tick)
-        pyautogui.moveTo(left-270,top-225) 
+        pyautogui.doubleClick(left-270,top-225) 
         pyautogui.doubleClick(left-270,top-225)
         sleep(tick)
-        pyautogui.moveTo(left-300,top-200) 
+        pyautogui.doubleClick(left-300,top-200) 
         pyautogui.doubleClick(left-300,top-200)
         sleep(tick)
-        pyautogui.moveTo(left-270,top-200) 
+        pyautogui.doubleClick(left-270,top-200) 
         pyautogui.doubleClick(left-270,top-200)  
         sleep(tick)
         pydirectinput.keyDown('c')
@@ -218,16 +245,16 @@ def Pierce():
         print('Roll XP')
         left, top, width, height = image_position_inventory 
     try:
-        pyautogui.moveTo(left-200,top-225)
+        pyautogui.doubleClick(left-200,top-225)
         pyautogui.doubleClick(left-200,top-225)
         sleep(tick)
-        pyautogui.moveTo(left-170,top-225)
+        pyautogui.doubleClick(left-170,top-225)
         pyautogui.doubleClick(left-170,top-225)
         sleep(tick)
-        pyautogui.moveTo(left-200,top-200)
+        pyautogui.doubleClick(left-200,top-200)
         pyautogui.doubleClick(left-200,top-200)
         sleep(tick)
-        pyautogui.moveTo(left-170,top-200)
+        pyautogui.doubleClick(left-170,top-200)
         pyautogui.doubleClick(left-170,top-200) 
         sleep(tick)
         pydirectinput.keyDown('c')
@@ -251,16 +278,16 @@ def DMG():
         print('Roll DMG')
         left, top, width, height = image_position_inventory 
     try:
-        pyautogui.moveTo(left-200,top-225)
+        pyautogui.doubleClick(left-200,top-225)
         pyautogui.doubleClick(left-200,top-225)
         sleep(tick)
-        pyautogui.moveTo(left-140,top-225)
+        pyautogui.doubleClick(left-140,top-225)
         pyautogui.doubleClick(left-140,top-225)
         sleep(tick)
-        pyautogui.moveTo(left-200,top-200)
+        pyautogui.doubleClick(left-200,top-200)
         pyautogui.doubleClick(left-200,top-200)
         sleep(tick)
-        pyautogui.moveTo(left-140,top-200)
+        pyautogui.doubleClick(left-140,top-200)
         pyautogui.doubleClick(left-140,top-200) 
         sleep(tick)
         pydirectinput.keyDown('c')
@@ -284,16 +311,16 @@ def PVE():
         print('Roll DMG')
         left, top, width, height = image_position_inventory 
     try:
-        pyautogui.moveTo(left-200,top-225) #Giáp
+        pyautogui.doubleClick(left-200,top-225) #Giáp
         pyautogui.doubleClick(left-200,top-225)
         sleep(tick)
-        pyautogui.moveTo(left-110,top-225) #Súng
+        pyautogui.doubleClick(left-110,top-225) #Súng
         pyautogui.doubleClick(left-110,top-225)
         sleep(tick)
-        pyautogui.moveTo(left-270,top-200) #Bùa
+        pyautogui.doubleClick(left-270,top-200) #Bùa
         pyautogui.doubleClick(left-270,top-200)  
         sleep(tick)
-        pyautogui.moveTo(left-110,top-200) #TL
+        pyautogui.doubleClick(left-110,top-200) #TL
         pyautogui.doubleClick(left-110,top-200) 
         sleep(tick)
         pydirectinput.keyDown('c')
@@ -338,6 +365,28 @@ def Zero_form():
     keyupR()
     pyautogui.press('esc') #Exit F7
 
+# def Pierce_form():
+#     pyautogui.click(button='left',x=201,y=1049) #change chat channel
+#     pyautogui.click(button='left',x=320,y=1067) #open F7
+#     pyautogui.click(button='left',x=837,y=552) #Choose flight form list
+#     pyautogui.click(button='left',x=774,y=631) #Choose flight form "Pierce"  
+#     pyautogui.click(button='left',x=980,y=690) #Apply
+#     pyautogui.click(button='left',x=16,y=1050) #All chat channel
+#     pyautogui.click(button='left',x=960,y=540) #Move to Central
+#     keyupR()
+#     pyautogui.press('esc') #Exit F7
+
+# def DMG_form():
+#     pyautogui.click(button='left',x=201,y=1049) #change chat channel
+#     pyautogui.click(button='left',x=320,y=1067) #open F7
+#     pyautogui.click(button='left',x=837,y=552) #Choose flight form list
+#     pyautogui.click(button='left',x=774,y=631) #Choose flight form "DMG"  
+#     pyautogui.click(button='left',x=980,y=690) #Apply
+#     pyautogui.click(button='left',x=16,y=1050) #All chat channel
+#     pyautogui.click(button='left',x=960,y=540) #Move to Central
+#     keyupR()
+#     pyautogui.press('esc') #Exit F7
+
 def ChangeLeader():
     pyautogui.click(button='left',x=201,y=1049) #change chat channel
     pyautogui.click(button='left',x=320,y=1067) #open F7
@@ -379,8 +428,8 @@ def hotkey_changeLeader():
 
 if __name__ == "__main__":
     print (powered_by)
-    print ("Powered by Hwng")
-    print ("\nVersion: 090524")
+    print ("Powered by Hwng Code Lỏd")
+    print ("\nVersion: 030524")
     sleep(0.5)
     # print ("\nHướng dẫn đổi đội hình\nSpace + F1 để kích hoạt\n    Space + Z = Giao diện đội hình\n    Space + C = Chia damage\n    Space + V = Tăng tốc\n    Space + X = 0ms\nSpace + F4 để tắt")
     # sleep(0.5)
@@ -388,45 +437,30 @@ if __name__ == "__main__":
     auto_ammunition_process.start()
     print('\nKích hoạt tự động nạp đạn')
     sleep(0.5)
-    # input("\nBấm Enter để trở về game!")
-    # sleep(0.5)
     print('\nBắt đầu')
     sleep(0.5)
-    hwd = win32gui.FindWindow(None, "DreamACE")
-    if not hwd:
-        print ('\nKhông tìm thấy game.')
-        sleep(1)
-        print ('\nThoát phần mềm trong 2 giấy.')
-        sleep(1)
-        print('2')
-        sleep(1)
-        print('1')
-        sleep(1)
-        exit()
-    win32gui.SetForegroundWindow(hwd)
-    pyautogui.moveTo(x=960, y=540)
-    keyboard.add_hotkey('space+F5',trigger_change_roll_status)
-    keyboard.add_hotkey('ctrl+z',PVE)
-    keyboard.add_hotkey('ctrl+q',Accuracy)
-    keyboard.add_hotkey('ctrl+d',Pierce)
-    keyboard.add_hotkey('ctrl+e',DMG)
-    keyboard.add_hotkey('space+F1',trigger_change_form_status)   
-    keyboard.add_hotkey('space+c', hotkey_X)
-    keyboard.add_hotkey('space+v', hotkey_Boost)
-    keyboard.add_hotkey('space+x', hotkey_Zero)
-    keyboard.add_hotkey('space+z', hotkey_changeLeader)
+    # hwd = win32gui.FindWindow(None, "DreamACE")
+    # if not hwd:
+    #     print ('\nKhông tìm thấy game.')
+    #     sleep(1)
+    #     print ('\nThoát phần mềm trong 2 giây.')
+    #     sleep(1)
+    #     print('2')
+    #     sleep(1)
+    #     print('1')
+    #     sleep(1)
+    #     exit()
+    # win32gui.SetForegroundWindow(hwd)
+    # pyautogui.moveTo(x=960, y=540)
+    keyboard.add_hotkey(roll_1,trigger_change_roll_status)
+    keyboard.add_hotkey(roll_2,PVE)
+    keyboard.add_hotkey(roll_3,Accuracy)
+    keyboard.add_hotkey(roll_4,Pierce)
+    keyboard.add_hotkey(roll_5,DMG)
+    keyboard.add_hotkey(flightform_1,trigger_change_form_status)   
+    keyboard.add_hotkey(flightform_2, hotkey_X)
+    keyboard.add_hotkey(flightform_3, hotkey_Boost)
+    keyboard.add_hotkey(flightform_4, hotkey_Zero)
+    keyboard.add_hotkey(flightform_5, hotkey_changeLeader)
     keyboard.add_hotkey('space+F4', signal.raise_signal, args=(signal.SIGINT,))
     keyboard.wait()
-
-    # keyboard.add_hotkey(roll_1,trigger_change_roll_status)
-    # keyboard.add_hotkey(roll_2,PVE)
-    # keyboard.add_hotkey(roll_3,Accuracy)
-    # keyboard.add_hotkey(roll_4,Pierce)
-    # keyboard.add_hotkey(roll_5,DMG)
-    # keyboard.add_hotkey(flightform_1,trigger_change_form_status)   
-    # keyboard.add_hotkey(flightform_2, hotkey_X)
-    # keyboard.add_hotkey(flightform_3, hotkey_Boost)
-    # keyboard.add_hotkey(flightform_4, hotkey_Zero)
-    # keyboard.add_hotkey(flightform_5, hotkey_changeLeader)
-    # keyboard.add_hotkey('space+F4', signal.raise_signal, args=(signal.SIGINT,))
-    # keyboard.wait()

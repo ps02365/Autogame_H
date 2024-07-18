@@ -1,2 +1,0 @@
-ammunition_key=0
-confidence=0.7
